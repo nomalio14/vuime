@@ -40,10 +40,10 @@
                 <b-icon
                 icon="alert-circle"
                 size="is-medium"
-                type="is-warning">
+                type="is-primary">
             </b-icon>
               </a>
-              <a class="button is-link">
+              <a class="button is-dark">
                 サムネ
               </a>
         </div>
