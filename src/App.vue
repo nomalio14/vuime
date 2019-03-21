@@ -32,24 +32,22 @@
               <a class="button is-white">
                 <b-icon
                 icon="account-plus"
-                size="is-medium"
                 type="is-dark">
             </b-icon>
               </a>
               <a class="button is-white">
                 <b-icon
                 icon="alert-circle"
-                size="is-medium"
                 type="is-primary">
             </b-icon>
               </a>
-              <a class="button is-dark">
-                サムネ
+              <a>
+                <img class="headAvatar" src="./assets/sampleAvatar.png" width="40" height="40">
               </a>
         </div>
       </div>
     </nav>
-    <div class="columns is-fullheight" v-on:click="fire">
+    <div class="columns is-fullheight" v-on:click="close">
     <div class="column is-2-desktop is-sidebar-menu is-hidden-touch">
     <sideMenu />
     </div>
@@ -79,6 +77,9 @@ export default {
   methods: {
     fire:function(){
       this.on = !this.on;
+    },
+    close:function(){
+      this.on = false;
     }
   }
 }
@@ -153,6 +154,10 @@ a.navbar-burger.burger {
 .show-enter, .show-leave-to {
   transform: translateX(-105%);
   opacity: 0
+}
+.headAvatar {
+  max-height: 100%!important;
+  margin-left: 10px;
 }
 
 </style>
