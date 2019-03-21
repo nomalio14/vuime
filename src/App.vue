@@ -1,18 +1,25 @@
 <template>
   <div id="app">
     <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand column is-2" >
-        <a class="navbar-item" href="/">
+      <div class="navbar-brand column is-2-desktop" >
+        <a v-on:click="on = !on; changeClass()" v-if="!on" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+        <a v-on:click="changeClass();fire" v-if="on" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+        <a class="navbar-item is-hidden-touch" href="/">
           <img src="./assets/vuiMeLogo.png" width="112" height="28">
         </a>
-    
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
+        <a class="navbar-item is-hidden-desktop" href="/" id="mobileLogo">
+          <img src="./assets/vuiMeLogo.png" width="112" height="28">
         </a>
       </div>
-          <div class="navbar-item column is-7">
+          <div class="navbar-item column is-7-desktop" expanded>
           <b-field position="is-centered">
             <b-input placeholder="Search..." expanded></b-input>
             <p class="control">
@@ -20,23 +27,31 @@
             </p>
         </b-field>
         </div>
-          <div class="navbar-item column is-3">
-            <div class="buttons" id="rightItemOfHeader">
-              <a class="button is-primary">
+          <div class="navbar-item column is-3 is-hidden-touch">
+            <div class="buttons is-hidden-touch" id="rightItemOfHeader">
+              <a class="button is-white">
                 <b-icon
-                pack="fas"
-                icon="user"
-                size="is-medium">
+                icon="account-plus"
+                size="is-medium"
+                type="is-dark">
             </b-icon>
               </a>
-              <a class="button is-light">
-                Log in
+              <a class="button is-white">
+                <b-icon
+                icon="alert-circle"
+                size="is-medium"
+                type="is-warning">
+            </b-icon>
+              </a>
+              <a class="button is-link">
+                サムネ
               </a>
         </div>
       </div>
     </nav>
     <div class="columns is-fullheight">
-  <div class="column is-2 is-sidebar-menu is-hidden-mobile">
+  <transition name="show">
+  <div v-bind:class="{ 'is-hidden-touch': isActive }" class="column is-2-desktop is-sidebar-menu" v-if="on">
     <aside class="menu">
   <p class="menu-label">
     General
@@ -69,16 +84,33 @@
   </ul>
 </aside>
   </div>
+  </transition>
   <router-view></router-view>
 </div>
         </div>
 </template>
 
 <script>
-
 export default {
   name: 'app',
   components: {
+  },
+  data () {
+    return {
+      isActive: true,
+      on:false
+    }
+  },
+  methods: {
+    changeClass: function() {
+      if(this.isActive == true) {
+        this.isActive = false;
+      } else {
+        this.isActive = true;
+        this.on = !this.on;
+      }
+    },
+
   }
 }
 
@@ -122,6 +154,24 @@ export default {
 .menu-label{
   text-align: left;
   border-bottom: 1px solid;
+}
+a.navbar-burger.burger {
+  float: left;
+}
+
+#mobileLogo {
+  float: right;
+}
+
+.show-enter-active, .show-leave-active {
+  overflow: auto;
+  transition: all .2s ease-in-out;
+  -webkit-transform: translateX(-105%);
+  transform: translateX(-105%);
+  
+}
+.show-enter, .show-leave-to {
+  opacity: 0
 }
 
 </style>
