@@ -49,7 +49,7 @@
         </div>
       </div>
     </nav>
-    <div class="columns is-fullheight">
+    <div class="columns is-fullheight" v-on:click="fire">
     <div class="column is-2-desktop is-sidebar-menu is-hidden-touch">
     <sideMenu />
     </div>
@@ -99,6 +99,7 @@ export default {
   padding: 2.5rem;
   background: #4a4a4a;
 }
+
 .is-sidebar-menu li a {
   color: white;
 }
@@ -109,12 +110,23 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: stretch;
+  position: sticky;
 }
-.columns.is-fullheight .column {
+.columns.is-fullheight .is-hidden-touch {
   overflow-y: auto;
 }
+.columns.is-fullheight .is-hidden-desktop {
+  position: fixed;
+  overflow-y: auto;
+  z-index: 99;
+    width:80%;
+    height:100%;
+  -webkit-overflow-scrolling: touch;
+}
+
 .is-main-content {
   background: #dbdbdb;
+  display: block;
 }
 .menu-list a.is-active {
   background-color: hsl(171, 100%, 41%);
