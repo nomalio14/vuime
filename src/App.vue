@@ -2,12 +2,12 @@
   <div id="app">
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand column is-2-desktop" >
-        <a v-on:click="changeClass();on = !on" v-if="!on" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a v-on:click="on = !on" v-if="!on" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
-        <a v-on:click="changeClass();fire" v-if="on" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a v-on:click="fire" v-if="on" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -50,40 +50,13 @@
       </div>
     </nav>
     <div class="columns is-fullheight">
-  <transition name="show">
-  <div  v-if="on" v-bind:class="{ 'is-hidden-touch': isActive }" class="column is-2-desktop is-sidebar-menu">
-    <aside class="menu">
-  <p class="menu-label">
-    General
-  </p>
-  <ul class="menu-list">
-    <li><router-link to="/">My Tasks</router-link></li>
-    <li><router-link to="/page2">My Gantt</router-link></li>
-  </ul>
-  <p class="menu-label">
-    Groups
-  </p>
-  <ul class="menu-list">
-    <li><router-link to="/page3">GroupA</router-link></li>
-    <li><a>GroupB</a></li>
-    <li><a>GroupC</a></li>
-    <li><a>GroupD</a></li>
-    <li><a>GroupE</a></li>
-  </ul>
-  <p class="menu-label">
-    Peoples
-  </p>
-  <ul class="menu-list">
-    <li><a>PeopleA</a></li>
-    <li><a>PeopleB</a></li>
-    <li><a>PeopleC</a></li>
-    <li><a>PeopleD</a></li>
-    <li><a>PeopleE</a></li>
-    <li><a>PeopleF</a></li>
-    <li><a>PeopleG</a></li>
-  </ul>
-</aside>
-  </div>
+    <div class="column is-2-desktop is-sidebar-menu is-hidden-touch">
+    <sideMenu />
+    </div>
+    <transition name="show">
+    <div class="column is-2-desktop is-sidebar-menu is-hidden-desktop" v-if="on">
+    <sideMenu />
+    </div>
   </transition>
   <router-view></router-view>
 </div>
@@ -91,29 +64,24 @@
 </template>
 
 <script>
+import sideMenu from './components/sideMenu.vue'
 export default {
   name: 'app',
   components: {
+    sideMenu,
   },
   data () {
     return {
       isActive: true,
-      on:true
+      on:false
     }
   },
   methods: {
-    changeClass: function() {
-      if(this.isActive == true) {
-        this.isActive = false;
-      } else {
-        this.isActive = true;
-        this.on = !this.on;
-      }
-    },
-
+    fire:function(){
+      this.on = !this.on;
+    }
   }
 }
-
 </script>
 <style>
 #app {
@@ -166,11 +134,12 @@ a.navbar-burger.burger {
 .show-enter-active, .show-leave-active {
   overflow: auto;
   transition: all .2s ease-in-out;
-  -webkit-transform: translateX(-105%);
-  transform: translateX(-105%);
+  -webkit-transform: translateX(10px);
+  transform: translateX(10px);
   
 }
 .show-enter, .show-leave-to {
+  transform: translateX(-105%);
   opacity: 0
 }
 
