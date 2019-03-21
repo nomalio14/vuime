@@ -2,7 +2,7 @@
   <div id="app">
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand column is-2-desktop" >
-        <a v-on:click="on = !on; changeClass()" v-if="!on" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a v-on:click="changeClass();on = !on" v-if="!on" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -51,7 +51,7 @@
     </nav>
     <div class="columns is-fullheight">
   <transition name="show">
-  <div v-bind:class="{ 'is-hidden-touch': isActive }" class="column is-2-desktop is-sidebar-menu" v-if="on">
+  <div  v-if="on" v-bind:class="{ 'is-hidden-touch': isActive }" class="column is-2-desktop is-sidebar-menu">
     <aside class="menu">
   <p class="menu-label">
     General
@@ -98,7 +98,7 @@ export default {
   data () {
     return {
       isActive: true,
-      on:false
+      on:true
     }
   },
   methods: {
