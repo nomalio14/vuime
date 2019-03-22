@@ -32,26 +32,22 @@
       style="max-height: 600px;"
     >
     <v-container style="height: 1000px;">
+        
     <div class="contentControl">
     <div class="field is-grouped">
-  <div>
-        <v-btn class="filiterItem" color="grey lighten-2" depressed>
+      <section>
+        <v-btn small class="filiterItem" color="grey lighten-2" depressed>
         <v-icon>format_list_bulleted</v-icon>Lists</v-btn>
-  </div>
-  <div>
-        <v-btn class="filiterItem" color="grey lighten-2" depressed>
+        <v-btn small class="filiterItem" color="grey lighten-2" depressed>
         <v-icon>format_align_left</v-icon>Gantt</v-btn>
-  </div>
-  <div>
-        <v-btn class="filiterItem" color="grey lighten-2" depressed>
+        <v-btn small class="filiterItem" color="grey lighten-2" depressed>
         <v-icon>trending_down</v-icon>Graf</v-btn>
-  </div>
-  <div>
-        <v-btn class="filiterItem" color="grey lighten-2" depressed>
+        <v-btn small class="filiterItem" color="grey lighten-2" depressed>
         <v-icon>check_circle_outline</v-icon>Completed</v-btn>
+  </section>
   </div>
-</div>
     </div>
+    
     </v-container>
     </div>
   </div>
@@ -69,6 +65,8 @@
     width: 100%;
 }
 .filiterItem{
+    margin-right: 0;
+    float: left;
     color: #6E6E6E !important;
 }
 

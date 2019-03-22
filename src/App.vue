@@ -128,6 +128,7 @@ export default {
   -webkit-overflow-scrolling: touch;
 }
 .is-main-content {
+  width: 100%;
   padding: 0;
   background: #E0E0E0;
   display: block;
