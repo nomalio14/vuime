@@ -117,7 +117,7 @@ export default {
   overflow-y: auto;
 }
 .columns.is-fullheight .is-hidden-desktop {
-  position: fixed;
+  position: absolute;
   overflow-y: auto;
   z-index: 99;
     width:80%;
