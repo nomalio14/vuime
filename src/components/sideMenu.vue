@@ -21,7 +21,7 @@
     Peoples
   </p>
   <ul class="menu-list">
-    <li><a>PeopleA</a></li>
+    <li><router-link to="/peoplePage">PeopleA</router-link></li>
     <li><a>PeopleB</a></li>
     <li><a>PeopleC</a></li>
     <li><a>PeopleD</a></li>

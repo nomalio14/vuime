@@ -10,7 +10,8 @@
   "dependencies": {
     "font-awesome": "^4.7.0",
     "vue": "^2.6.6",
-    "vue-router": "^3.0.2"
+    "vue-router": "^3.0.2",
+    "vuetify": "^1.5.7"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",

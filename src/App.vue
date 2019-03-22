@@ -1,6 +1,7 @@
 <template>
+<v-app>
   <div id="app">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar headerNav is-fixed-top" role="navigation" aria-label="main navigation">
       <div class="navbar-brand column is-2-desktop" >
         <a v-on:click="on = !on" v-if="!on" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
@@ -19,34 +20,26 @@
           <img src="./assets/vuiMeLogo.png" width="112" height="28">
         </a>
       </div>
-          <div class="navbar-item column is-7-desktop" expanded>
-          <b-field position="is-centered">
-            <b-input placeholder="Search..." expanded></b-input>
-            <p class="control">
-                <button class="button is-primary is-outlined">Search</button>
-            </p>
-        </b-field>
+          <div class="navbar-item column is-7-desktop pSearchForm" expanded>
+          <v-text-field box label="Search..." prepend-inner-icon="search" color="teal accent-4"></v-text-field>
         </div>
           <div class="navbar-item column is-3 is-hidden-touch">
             <div class="buttons is-hidden-touch" id="rightItemOfHeader">
-              <a class="button is-white">
-                <b-icon
-                icon="account-plus"
-                type="is-dark">
-            </b-icon>
-              </a>
-              <a class="button is-white">
-                <b-icon
-                icon="alert-circle"
-                type="is-primary">
-            </b-icon>
-              </a>
+              <v-btn flat icon color="teal accent-4">
+              <v-icon medium>add_circle_outline</v-icon>
+              </v-btn>
+              <v-btn flat icon color="pink">
+              <v-icon >notifications</v-icon>
+              </v-btn>
               <a>
-                <img class="headAvatar" src="./assets/sampleAvatar.png" width="40" height="40">
+                <v-avatar class="headerAvatar">
+                  <img src="https://cdn.vuetifyjs.com/images/john.jpg">
+                </v-avatar>
               </a>
         </div>
       </div>
     </nav>
+    <body>
     <div class="columns is-fullheight" v-on:click="close">
     <div class="column is-2-desktop is-sidebar-menu is-hidden-touch">
     <sideMenu />
@@ -58,7 +51,9 @@
   </transition>
   <router-view></router-view>
 </div>
-        </div>
+</body>
+</div>
+</v-app>
 </template>
 
 <script>
@@ -85,6 +80,12 @@ export default {
 }
 </script>
 <style>
+@media screen and (max-width:1023px) {
+.is-fullheight{
+  padding-top: 45px;
+}
+  }
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -102,6 +103,7 @@ export default {
 }
 
 .is-sidebar-menu li a {
+  text-align: left;
   color: white;
 }
 .columns.is-fullheight {
@@ -113,6 +115,7 @@ export default {
   justify-content: stretch;
   position: sticky;
 }
+
 .columns.is-fullheight .is-hidden-touch {
   overflow-y: auto;
 }
@@ -124,13 +127,12 @@ export default {
     height:100%;
   -webkit-overflow-scrolling: touch;
 }
-
 .is-main-content {
   background: #dbdbdb;
   display: block;
 }
 .menu-list a.is-active {
-  background-color: hsl(171, 100%, 41%);
+  background-color: #00BFA5;
 }
 .menu-label{
   text-align: left;
@@ -159,6 +161,23 @@ a.navbar-burger.burger {
   max-height: 100%!important;
   margin-left: 10px;
 }
+.navbar-item img {
+    max-height: 100%;
+}
+
+.searchForm{
+  margin-top: 7px;
+}
+.pSearchForm{
+  height: 80px;
+}
+.headerAvatar {
+  margin-left: 20px;
+}
+body {
+  padding-top: 40px; 
+  }
+
 
 </style>
 <style lang="sass">

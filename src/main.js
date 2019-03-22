@@ -4,6 +4,12 @@ import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 Vue.use(Buefy)
 import App from './App.vue'
+import Vuetify from 'vuetify'
+import "vuetify/dist/vuetify.min.css";
+Vue.use(Vuetify, {
+  iconfont: 'mdi' // 'md' || 'mdi' || 'fa' || 'fa4'
+})
+
 
 Vue.config.productionTip = false
 
