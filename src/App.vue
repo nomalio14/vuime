@@ -21,11 +21,11 @@
         </a>
       </div>
           <div class="navbar-item column is-7-desktop pSearchForm" expanded>
-          <v-text-field box label="Search..." prepend-inner-icon="search" color="teal accent-4"></v-text-field>
+          <v-text-field box label="Search..." prepend-inner-icon="search" color="teal lighten-3"></v-text-field>
         </div>
           <div class="navbar-item column is-3 is-hidden-touch">
             <div class="buttons is-hidden-touch" id="rightItemOfHeader">
-              <v-btn flat icon color="teal accent-4">
+              <v-btn flat icon color="teal lighten-3">
               <v-icon medium>add_circle_outline</v-icon>
               </v-btn>
               <v-btn flat icon color="pink">
@@ -82,7 +82,7 @@ export default {
 <style>
 @media screen and (max-width:1023px) {
 .is-fullheight{
-  padding-top: 45px;
+  padding-top: 47px;
 }
   }
 
@@ -128,7 +128,8 @@ export default {
   -webkit-overflow-scrolling: touch;
 }
 .is-main-content {
-  background: #dbdbdb;
+  padding: 0;
+  background: #E0E0E0;
   display: block;
 }
 .menu-list a.is-active {
@@ -136,6 +137,7 @@ export default {
 }
 .menu-label{
   text-align: left;
+  color: #dbdbdb;
   border-bottom: 1px solid;
 }
 a.navbar-burger.burger {
@@ -175,7 +177,7 @@ a.navbar-burger.burger {
   margin-left: 20px;
 }
 body {
-  padding-top: 40px; 
+  padding-top: 45px; 
   }
 
 
