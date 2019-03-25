@@ -65,6 +65,7 @@
     width: 100%;
 }
 .filiterItem{
+    text-transform: none!important;
     margin-right: 0;
     float: left;
     color: #6E6E6E !important;
