@@ -101,6 +101,13 @@ export default {
   padding: 2.5rem;
   background: #4a4a4a;
 }
+.navbar-burger:hover{
+  background-color: rgba(0, 0, 0, 0.0);
+}
+.navbar-burger{
+  color:#2c3e50;
+}
+
 
 .is-sidebar-menu li a {
   text-align: left;
