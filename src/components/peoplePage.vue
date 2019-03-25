@@ -28,7 +28,7 @@
     <div
       id="scrolling-techniques"
       class="scroll-y"
-      style="max-height: 600px;"
+      style="max-height: 800px;"
     >
     <v-container style="height: 1000px;">
   
@@ -51,19 +51,23 @@
     <v-layout>
     <v-flex xs12>
       <v-card>
+      <v-subheader>All Tasks</v-subheader>
+        <v-expansion-panel>
+    <v-expansion-panel-content
+      v-for="(item, index) in tasks"
+      :key="item.title"
+    >
+      <template v-slot:header>
         <v-list two-line subheader>
-          <v-subheader>All Tasks</v-subheader>
-          <template v-for="(item, index) in tasks">
-            <v-list-tile
-              :key="item.title"
-              avatar
+          <v-list-tile
               ripple
+              avatar
               @click="toggle(index)"
-            >
-              <v-list-tile-avatar>
+              >
+          <v-list-tile-avatar>
                 <img :src="item.avatar">
               </v-list-tile-avatar>
-              <v-flex xs4 sm7>
+              <v-flex xs7 sm10>
               <v-list-tile-content>
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
                 <v-list-tile-sub-title class="text--primary">{{ item.headline }}</v-list-tile-sub-title>
@@ -71,32 +75,16 @@
               </v-list-tile-content>
               </v-flex>
               <v-spacer></v-spacer>
-              <v-list-tile-content>
-                <v-list-tile-title class="due">{{ item.action }}</v-list-tile-title>
-              </v-list-tile-content>
-              <v-list-tile-action>
-                <v-icon
-                  v-if="selected.indexOf(index) < 0"
-                  color="grey lighten-1"
-                >
-                  check_circle_outline
-                </v-icon>
-
-                <v-icon
-                  v-else
-                  color="teal lighten-3"
-                >
-                  check_circle
-                </v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
-            <v-divider
-              v-if="index < items.length"
-              :key="index"
-            ></v-divider>
-          </template>
+              <v-list-tile-action-text class="due">{{ item.action }}</v-list-tile-action-text>
+          </v-list-tile>
         </v-list>
+      </template>
+      <v-card>
+        <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-card-text>
       </v-card>
+    </v-expansion-panel-content>
+  </v-expansion-panel>
+  </v-card>
     </v-flex>
   </v-layout>
 
@@ -108,6 +96,14 @@
 </template>
 
 <style>
+.v-expansion-panel__header{
+  display: initial!important;
+  display: -webkit-box!important;
+  display: -ms-flexbox!important;
+
+  padding: 0px 15px!important;
+}
+
 .due{
   text-align: center!important;
 }
