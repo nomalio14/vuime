@@ -91,13 +91,17 @@
     </v-flex>
     </v-layout>
           </div>
-        <v-divider></v-divider>
+        <div class="container">
         <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary" flat @click="dialog = false">
-            I accept
+        <v-btn flat @click="dialog = false">
+            Cancel
+        </v-btn>
+        <v-btn color="teal lighten-3" dark depressed @click="dialog = false">
+            Create
         </v-btn>
         </v-card-actions>
+        </div>
     </v-card>
 </v-dialog>
 </template>

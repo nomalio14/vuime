@@ -42,51 +42,12 @@
         <v-icon>trending_down</v-icon>Graf</v-btn>
         </v-btn-toggle>
         <v-spacer></v-spacer>
-    <v-flex xs3 sm2 d-flex>
-        <v-select color="teal lighten-3" :items="items" label="Assigned" class="rightFilter" v-model="e1" ></v-select>
+    <v-flex xs3 sm2>
+        <v-select color="teal lighten-3" :items="items" label="Assigned" class="rightFilter" v-model="Assigned" ></v-select>
       </v-flex>
   </div>
     </div>
-    <v-layout>
-    <v-flex xs12>
-      <v-card>
-        <addTaskOnPeople />
-      <v-subheader>All Tasks</v-subheader>
-        <v-expansion-panel>
-    <v-expansion-panel-content
-      v-for="(item, index) in tasks"
-      :key="item.title"
-    >
-      <template v-slot:header>
-        <v-list two-line subheader>
-          <v-list-tile
-              ripple
-              avatar
-              @click="toggle(index)"
-              >
-          <v-list-tile-avatar>
-                <img :src="item.avatar">
-              </v-list-tile-avatar>
-              <v-flex xs7 sm10>
-              <v-list-tile-content>
-                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                <v-list-tile-sub-title class="text--primary">{{ item.headline }}</v-list-tile-sub-title>
-                <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
-              </v-list-tile-content>
-              </v-flex>
-              <v-spacer></v-spacer>
-              <v-list-tile-action-text class="due">{{ item.action }}</v-list-tile-action-text>
-          </v-list-tile>
-        </v-list>
-      </template>
-      <v-card>
-        <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-card-text>
-      </v-card>
-    </v-expansion-panel-content>
-  </v-expansion-panel>
-  </v-card>
-    </v-flex>
-  </v-layout>
+    <taskListOnPeople />
     </v-container>
     </div>
   </div>
@@ -103,22 +64,6 @@
 }
 .v-toolbar--floating{
   margin:0!important;
-}
-
-
-.v-expansion-panel__header{
-  display: initial!important;
-  display: -webkit-box!important;
-  display: -ms-flexbox!important;
-
-  padding: 0px 15px!important;
-}
-
-.due{
-  text-align: center!important;
-}
-hr {
-  margin: 0!important;
 }
 
 .rightFilter{
@@ -150,62 +95,19 @@ hr {
 </style>
 
 <script>
-import addTaskOnPeople from './addTaskOnPeople.vue'
+import taskListOnPeople from './taskListOnPeople.vue'
   export default {
     components: {
-    addTaskOnPeople,
+    taskListOnPeople
   },
     data: () => ({
       toggle_exclusive: 0,
       dialog: false,
-      e1: 'All',
+      Assigned: 'All',
       items: ['All', 'toMe','DueToday','Completed'],
-      tasks: [
-          {
-            action: 'Feb 12th',
-            headline: 'Use Vue.js',
-            avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-            title: 'Build people page',
-            subtitle: "Could you check this UI compornemt?"
-          },
-          {
-            action: 'Mar 22th',
-            title: 'Solve select feature',
-            avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-            subtitle: "Did you push to github?"
-          },
-          {
-            action: 'Mar 23th',
-            headline: 'Add upload feature',
-            avatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
-            title: 'Avatar feature',
-          },
-          {
-            action: 'Mar 30th',
-            headline: 'This is CV',
-            title: '【Primaly】Feedback of Interview',
-            avatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
-            subtitle: 'Could you update due?'
-          },
-          {
-            action: 'Apr 1st',
-            headline: 'Staf schedule is here',
-            avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-            title: 'TB scheduling'
-          }
-        ]
-        
     }),
     methods: {
-      toggle (index) {
-        const i = this.selected.indexOf(index)
-
-        if (i > -1) {
-          this.selected.splice(i, 1)
-        } else {
-          this.selected.push(index)
-        }
-      }
+      
     }
   }
 
