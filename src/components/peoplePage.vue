@@ -5,28 +5,27 @@
     style="position: relative;"
   >
     <v-toolbar
-      absolute
+      floating
       color="teal lighten-3"
       dark
-      scroll-off-screen
-      scroll-target="#scrolling-techniques"
+      class="contentToolbar"
     >
       <v-avatar class="headerAvatar">
         <img src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460">
       </v-avatar>
       <v-toolbar-title>Mtsui Akira</v-toolbar-title>
       <v-spacer></v-spacer>
+      <div class="rightItemOfcontentToolbar">
       <v-btn icon>
         <v-icon>perm_identity</v-icon>
         <P>1</p>
       </v-btn>
-
       <v-btn icon>
         <v-icon>more_vert</v-icon>
       </v-btn>
+      </div>
     </v-toolbar>
     <div
-      id="scrolling-techniques"
       class="scroll-y"
       style="max-height: 800px;"
     >
@@ -51,6 +50,7 @@
     <v-layout>
     <v-flex xs12>
       <v-card>
+        <addTaskOnPeople />
       <v-subheader>All Tasks</v-subheader>
         <v-expansion-panel>
     <v-expansion-panel-content
@@ -87,8 +87,6 @@
   </v-card>
     </v-flex>
   </v-layout>
-
-    
     </v-container>
     </div>
   </div>
@@ -96,6 +94,18 @@
 </template>
 
 <style>
+.v-toolbar__content{
+  width: 100%!important;
+}
+
+.contentToolbar{
+  width: 100%!important;
+}
+.v-toolbar--floating{
+  margin:0!important;
+}
+
+
 .v-expansion-panel__header{
   display: initial!important;
   display: -webkit-box!important;
@@ -121,7 +131,6 @@ hr {
 }
 
 .contentControl{
-    margin-top: 60px;
     height: 60px;
     width: 100%;
 }
@@ -141,12 +150,16 @@ hr {
 </style>
 
 <script>
+import addTaskOnPeople from './addTaskOnPeople.vue'
   export default {
+    components: {
+    addTaskOnPeople,
+  },
     data: () => ({
       toggle_exclusive: 0,
+      dialog: false,
       e1: 'All',
       items: ['All', 'toMe','DueToday','Completed'],
-      selected: [2],
       tasks: [
           {
             action: 'Feb 12th',

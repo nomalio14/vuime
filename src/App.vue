@@ -96,7 +96,7 @@ export default {
 #rightItemOfHeader{
   float: right;
   margin-right: 20px;
-}
+} 
 .is-sidebar-menu {
   padding: 2.5rem;
   background: #4a4a4a;
