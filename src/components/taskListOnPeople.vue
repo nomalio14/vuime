@@ -64,20 +64,24 @@
       <v-divider></v-divider>
       <v-container fluid grid-list-md class="detailContainer">
         <v-layout row wrap>
-        <v-flex d-flex xs12 sm8 md8>
+        <v-flex d-flex xs12 sm12 md12>
         <v-card>
         <v-subheader>
         <span>Created by</span>
         <v-list-tile-avatar class="createdAvatar" size="25px">
           <img :src="item.createdAvatar">
         </v-list-tile-avatar>
-        <span>{{ item.createrName }}</span>
+        <span class="detailHeadName">{{ item.createrName }}</span>
+        <span class="createdAvatar createdTimeAt">at</span>
+        <span class="detailHeadName">{{ item.createdAt }}</span>
         </v-subheader>
         </v-card>
         </v-flex>
-        <v-flex d-flex xs12 sm4 md4>
-        <v-card>
-        <span>test</span>
+        <v-flex d-flex xs12 sm3 md3>
+        <v-card flat>
+      <section>
+      <v-layout row wrap>
+      <v-flex xs5 sm12 md12>
       <v-menu
         v-model="menu3"
         :close-on-content-click="false"
@@ -98,8 +102,11 @@
             color="teal lighten-3"
           ></v-text-field>
         </template>
-        <v-date-picker color="teal lighten-3" v-model="date3" @input="menu3 = false"></v-date-picker>
+        <v-date-picker color="teal lighten-3" no-title v-model="date3" @input="menu3 = false"></v-date-picker>
       </v-menu>
+      </v-flex>
+      <v-spacer></v-spacer>
+      <v-flex xs5 sm12 md12 class="scheduler">
       <v-menu class="endDate"
         v-model="menu4"
         :close-on-content-click="false"
@@ -120,11 +127,34 @@
             color="teal lighten-3"
           ></v-text-field>
         </template>
-        <v-date-picker color="teal lighten-3" v-model="date4" @input="menu4 = false"></v-date-picker>
+        <v-date-picker class="date4" color="teal lighten-3" no-title v-model="date4" @input="menu4 = false"></v-date-picker>
       </v-menu>
+      </v-flex>
+      </v-layout>
+      </section>
+      <v-combobox
+            v-model="chips"
+            prepend-icon="people"
+            :items="items"
+            label="Assigned to"
+            chips
+            :rules="rules.name"
+            color="teal lighten-3"
+            multiple
+        >
+        <template v-slot:selection="data">
+        <v-chip
+            :selected="data.selected"
+            close
+            @input="remove(data.item)"
+        >
+        <strong>{{ data.item }}</strong>&nbsp;
+      </v-chip>
+    </template>
+  </v-combobox>
         </v-card>
         </v-flex>
-        <v-flex d-flex xs12 sm8 md8>
+        <v-flex d-flex xs12 sm9 md9>
         <v-card>
         <v-subheader>
         <span>Created by</span>
@@ -145,12 +175,19 @@
   </template>
 
   <style>
+  .detailHeadName{
+    color: #212121!important;
+  }
+
   .detailContainer{
     padding: 0 24px!important;
   }
   .createdAvatar{
     min-width: 40px!important;
     padding: 0px 7px!important;
+  }
+  .createdTimeAt{
+    text-align: center;
   }
   
   .taskDetailHead{
@@ -199,9 +236,15 @@ export default {
       menu3: false,
       menu4: false,
       sort: [{ title: 'Newest' },{ title: 'Due' }],
+      chips: ['Mtsui Akira'],
+      items: ['Noma Yuma','Mtsui Akira' ],
+      rules: {
+            name: [val => (val || '').length > 0 || 'This field is required']
+        },
       tasks: [
           {
             due: 'Feb 12th',
+            createdAt:'Feb 3th',
             headline: 'Use Vue.js',
             asignedAvatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
             createrName: 'Noma Yuma',
@@ -211,6 +254,7 @@ export default {
           },
           {
             due: 'Mar 22th',
+            createdAt:'Feb 5th',
             title: 'Solve select feature',
             asignedAvatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
             createrName: 'Noma Yuma',
@@ -219,6 +263,7 @@ export default {
           },
           {
             due: 'Mar 23th',
+            createdAt:'Feb 10th',
             headline: 'Add upload feature',
             asignedAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
             createrName: 'Matsui Akira',
@@ -227,6 +272,7 @@ export default {
           },
           {
             due: 'Mar 30th',
+            createdAt:'Feb 21th',
             headline: 'This is CV',
             title: '【Primaly】Feedback of Interview',
             asignedAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
@@ -236,6 +282,7 @@ export default {
           },
           {
             due: 'Apr 1st',
+            createdAt:'Feb 25th',
             headline: 'Staf schedule is here',
             asignedAvatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
             createrName: 'Noma Yuma',
@@ -246,7 +293,10 @@ export default {
         
     }),
     methods: {
-      
+      remove (item) {
+        this.chips.splice(this.chips.indexOf(item), 1)
+        this.chips = [...this.chips]
+      }
     }
   }
   </script>
