@@ -141,7 +141,7 @@ export default {
   display: block;
 }
 .menu-list a.is-active {
-  background-color: #00BFA5;
+  background-color: #80CBC4;
 }
 .menu-label{
   text-align: left;

@@ -65,7 +65,7 @@
       <v-container fluid grid-list-md class="detailContainer">
         <v-layout row wrap>
         <v-flex d-flex xs12 sm12 md12>
-        <v-card>
+        <v-card flat>
         <v-subheader>
         <span>Created by</span>
         <v-list-tile-avatar class="createdAvatar" size="25px">
@@ -95,7 +95,7 @@
         <template v-slot:activator="{ on }">
           <v-text-field
             v-model="date3"
-            label="Stat date"
+            label="Start date"
             readonly
             v-on="on"
             prepend-icon="event"
@@ -120,7 +120,7 @@
         <template v-slot:activator="{ on }">
           <v-text-field
             v-model="date4"
-            label="End date"
+            label="Due date"
             readonly
             v-on="on"
             prepend-icon="event"
@@ -152,17 +152,39 @@
       </v-chip>
     </template>
   </v-combobox>
+  <v-text-field
+            value="http://...."
+            label="Share"
+            prepend-icon="share"
+            box
+            readonly
+          ></v-text-field>
+        <v-layout row wrap>
+        <v-flex xs6 text-xs-center>
+        <v-btn flat class="DetailButtons">Delete</v-btn>
+        </v-flex>
+        <v-flex xs6 text-xs-center>
+        <v-btn depressed dark class="DetailButtons" color="teal lighten-3">Complete</v-btn>
+        </v-flex>
+        </v-layout>
         </v-card>
         </v-flex>
         <v-flex d-flex xs12 sm9 md9>
-        <v-card>
+        <v-card class="note">
         <v-subheader>
-        <span>Created by</span>
-        <v-list-tile-avatar class="createdAvatar" size="25px">
-          <img :src="item.createdAvatar">
-        </v-list-tile-avatar>
-        <span>{{ item.createrName }}</span>
+        <v-icon>speaker_notes
+        </v-icon>
+        <span>Note</span>
         </v-subheader>
+        <b-field class="commentInput">
+            <b-input placeholder="Comment..."
+                type="text"
+                expanded>
+            </b-input>
+            <p class="control">
+                <button class="button sendButton">Send</button>
+            </p>
+        </b-field>
         </v-card>
         </v-flex>
         </v-layout>
@@ -175,6 +197,22 @@
   </template>
 
   <style>
+  .sendButton{
+    background-color: #80CBC4!important;
+    color:white!important;
+  }
+  .note{
+    position: relative!important;
+  }
+  .commentInput{
+    width: 100%;
+    padding:0 16px;
+    position: absolute;
+	  bottom: 0;
+  }
+  .DetailButtons{
+    text-transform: none!important;
+  }
   .detailHeadName{
     color: #212121!important;
   }

@@ -56,7 +56,7 @@
         <template v-slot:activator="{ on }">
           <v-text-field
             v-model="startDate"
-            label="Stat date"
+            label="Start date"
             readonly
             v-on="on"
             color="teal lighten-3"
@@ -80,7 +80,7 @@
         <template v-slot:activator="{ on }">
           <v-text-field
             v-model="endDate"
-            label="End date"
+            label="Due date"
             readonly
             v-on="on"
             color="teal lighten-3"
