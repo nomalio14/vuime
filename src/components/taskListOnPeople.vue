@@ -176,6 +176,7 @@
         </v-icon>
         <span>Note</span>
         </v-subheader>
+        <div class="noteContents"></div>
         <b-field class="commentInput">
             <b-input placeholder="Comment..."
                 type="text"
@@ -197,6 +198,9 @@
   </template>
 
   <style>
+  .noteContents{
+    height: 300px;
+  }
   .sendButton{
     background-color: #80CBC4!important;
     color:white!important;
@@ -207,7 +211,7 @@
   .commentInput{
     width: 100%;
     padding:0 16px;
-    position: absolute;
+    position: absolute!important;
 	  bottom: 0;
   }
   .DetailButtons{
@@ -219,6 +223,7 @@
 
   .detailContainer{
     padding: 0 24px!important;
+    padding-bottom: 10px!important;
   }
   .createdAvatar{
     min-width: 40px!important;
