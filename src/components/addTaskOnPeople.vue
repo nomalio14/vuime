@@ -128,7 +128,6 @@
         dialog: false,
         startDate: new Date().toISOString().substr(0, 10),
         endDate: new Date().toISOString().substr(0, 10),
-        modal: false,
         menu1: false,
         menu2: false
       }

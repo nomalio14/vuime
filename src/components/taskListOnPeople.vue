@@ -23,7 +23,7 @@
       </v-menu>
 
       </v-subheader>
-        <v-expansion-panel>
+        <v-expansion-panel inset>
     <v-expansion-panel-content
       v-for="(item) in tasks"
       :key="item.title"
@@ -52,7 +52,7 @@
               <v-flex xs5 sm2>
               <div class="listRightItems">
               <v-list-tile-avatar size="30px">
-              <img :src="item.avatar">
+              <img :src="item.asignedAvatar">
               </v-list-tile-avatar>
               <v-list-tile-action-text class="due">{{ item.due }}</v-list-tile-action-text>
               </div>
@@ -60,15 +60,83 @@
           </v-list-tile>
         </v-list>
       </template>
-      <v-card class="taskDetail">
-        <v-flex xs8 sm8>
-        <v-textarea
-          color="teal lighten-3"
-          outline
-          label="Comment"
-        ></v-textarea>
+      <!--TaskDetail-->
+      <v-divider></v-divider>
+      <v-container fluid grid-list-md class="detailContainer">
+        <v-layout row wrap>
+        <v-flex d-flex xs12 sm8 md8>
+        <v-card>
+        <v-subheader>
+        <span>Created by</span>
+        <v-list-tile-avatar class="createdAvatar" size="25px">
+          <img :src="item.createdAvatar">
+        </v-list-tile-avatar>
+        <span>{{ item.createrName }}</span>
+        </v-subheader>
+        </v-card>
         </v-flex>
-      </v-card>
+        <v-flex d-flex xs12 sm4 md4>
+        <v-card>
+        <span>test</span>
+      <v-menu
+        v-model="menu3"
+        :close-on-content-click="false"
+        :nudge-right="40"
+        lazy
+        transition="scale-transition"
+        offset-y
+        full-width
+        min-width="290px"
+      >
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="date3"
+            label="Stat date"
+            readonly
+            v-on="on"
+            prepend-icon="event"
+            color="teal lighten-3"
+          ></v-text-field>
+        </template>
+        <v-date-picker color="teal lighten-3" v-model="date3" @input="menu3 = false"></v-date-picker>
+      </v-menu>
+      <v-menu class="endDate"
+        v-model="menu4"
+        :close-on-content-click="false"
+        :nudge-right="40"
+        lazy
+        transition="scale-transition"
+        offset-y
+        full-width
+        min-width="290px"
+      >
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="date4"
+            label="End date"
+            readonly
+            v-on="on"
+            prepend-icon="event"
+            color="teal lighten-3"
+          ></v-text-field>
+        </template>
+        <v-date-picker color="teal lighten-3" v-model="date4" @input="menu4 = false"></v-date-picker>
+      </v-menu>
+        </v-card>
+        </v-flex>
+        <v-flex d-flex xs12 sm8 md8>
+        <v-card>
+        <v-subheader>
+        <span>Created by</span>
+        <v-list-tile-avatar class="createdAvatar" size="25px">
+          <img :src="item.createdAvatar">
+        </v-list-tile-avatar>
+        <span>{{ item.createrName }}</span>
+        </v-subheader>
+        </v-card>
+        </v-flex>
+        </v-layout>
+      </v-container>
     </v-expansion-panel-content>
   </v-expansion-panel>
   </v-card>
@@ -77,10 +145,24 @@
   </template>
 
   <style>
+  .detailContainer{
+    padding: 0 24px!important;
+  }
+  .createdAvatar{
+    min-width: 40px!important;
+    padding: 0px 7px!important;
+  }
+  
+  .taskDetailHead{
+    background-color: #B2DFDB;
+    width: 100%;
+    color: white;
+  }
+
   .taskDetail {
     position: relative;
     margin:auto;
-    max-width: 87%;
+    max-width: 82%;
   }
   .listRightItems {
     float: right!important;
@@ -112,38 +194,52 @@ export default {
     addTaskOnPeople,
   },
     data: () => ({
+      date3: new Date().toISOString().substr(0, 10),
+      date4: new Date().toISOString().substr(0, 10),
+      menu3: false,
+      menu4: false,
       sort: [{ title: 'Newest' },{ title: 'Due' }],
       tasks: [
           {
             due: 'Feb 12th',
             headline: 'Use Vue.js',
-            avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+            asignedAvatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+            createrName: 'Noma Yuma',
+            createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
             title: 'Build people page',
             subtitle: "Could you check this UI compornemt?"
           },
           {
             due: 'Mar 22th',
             title: 'Solve select feature',
-            avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+            asignedAvatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+            createrName: 'Noma Yuma',
+            createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
             subtitle: "Did you push to github?"
           },
           {
             due: 'Mar 23th',
             headline: 'Add upload feature',
-            avatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
+            asignedAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
+            createrName: 'Matsui Akira',
+            createdAvatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
             title: 'Avatar feature',
           },
           {
             due: 'Mar 30th',
             headline: 'This is CV',
             title: '【Primaly】Feedback of Interview',
-            avatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
+            asignedAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
+            createrName: 'Matsui Akira',
+            createdAvatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
             subtitle: 'Could you update due?'
           },
           {
             due: 'Apr 1st',
             headline: 'Staf schedule is here',
-            avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+            asignedAvatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+            createrName: 'Noma Yuma',
+            createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
             title: 'TB scheduling'
           }
         ]
