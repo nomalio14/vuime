@@ -222,7 +222,7 @@
     width: 100%;
     padding:0 16px;
     position: absolute!important;
-	  bottom: 0;
+	  bottom: 0!important;
   }
   .DetailButtons{
     text-transform: none!important;

@@ -13,7 +13,7 @@
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
-        <a class="navbar-item is-hidden-touch" href="/">
+        <a class="navbar-item is-hidden-touch vuimeLogo" href="/">
           <img src="./assets/vuiMeLogo.png" width="112" height="28">
         </a>
         <a class="navbar-item is-hidden-desktop" href="/" id="mobileLogo">
@@ -25,10 +25,10 @@
         </div>
           <div class="navbar-item column is-3 is-hidden-touch">
             <div class="buttons is-hidden-touch" id="rightItemOfHeader">
-              <v-btn flat icon color="teal lighten-3">
-              <v-icon medium>add_circle_outline</v-icon>
+              <v-btn flat icon color="grey darken-2">
+              <v-icon medium>person_add</v-icon>
               </v-btn>
-              <v-btn flat icon color="pink">
+              <v-btn flat icon color="grey darken-2">
               <v-icon >notifications</v-icon>
               </v-btn>
               <a>
@@ -80,11 +80,11 @@ export default {
 }
 </script>
 <style>
-@media screen and (max-width:1090px) {
-.is-fullheight{
-  padding-top: 47px;
+.vuimeLogo{
+  top:5px;
+  left:15%;
 }
-  }
+
 .application--wrap{
   background-color: #DFE0E0;
   width: 100%;
@@ -101,18 +101,7 @@ export default {
   float: right;
   margin-right: 20px;
 } 
-.is-sidebar-menu.is-hidden-touch{
-  width: 250px;
-}
-.is-sidebar-menu {
-  position: fixed;
-  z-index: 1;
-  min-height: calc(100vh - ( 3.25rem - .75rem ) );
-  max-height: calc(100vh - ( 3.25rem - .75rem ) );
-  height: calc(100vh - ( 3.25rem - .75rem ) );
-  padding: 2.5rem;
-  background: #4a4a4a;
-}
+
 .navbar-burger:hover{
   background-color: rgba(0, 0, 0, 0.0);
 }
@@ -120,11 +109,6 @@ export default {
   color:#2c3e50;
 }
 
-
-.is-sidebar-menu li a {
-  text-align: left;
-  color: white;
-}
 .columns.is-fullheight {
   display: flex;
   flex-direction: row;
@@ -149,14 +133,8 @@ export default {
   background: #E0E0E0;
   display: block;
 }
-.menu-list a.is-active {
-  background-color: #80CBC4;
-}
-.menu-label{
-  text-align: left;
-  color: #dbdbdb;
-  border-bottom: 1px solid;
-}
+
+
 a.navbar-burger.burger {
   float: left;
 }
@@ -195,6 +173,11 @@ a.navbar-burger.burger {
 }
 body {
   padding-top: 45px; 
+  }
+@media screen and (max-width:1090px) {
+.is-fullheight{
+  padding-top: 47px;
+}
   }
 
 
