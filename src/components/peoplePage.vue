@@ -1,11 +1,6 @@
 <template>
-<span class="column is-main-content">
-    <div
-    class="hide-overflow"
-    style="position: relative;"
-  >
+<div class="column is-main-content" id="mainContent">
     <v-toolbar
-      floating
       color="teal lighten-3"
       dark
       class="contentToolbar"
@@ -25,12 +20,8 @@
       </v-btn>
       </div>
     </v-toolbar>
-    <div
-      class="scroll-y"
-      style="max-height: 800px;"
-    >
-    <v-container style="height: 1000px;">
-  
+    <div>
+    <v-container style="margin-top:64px;">
     <div class="contentControl">
     <div class="field is-grouped">
         <v-btn-toggle class="filterItemToggle"  v-model="toggle_exclusive">
@@ -51,16 +42,23 @@
     </v-container>
     </div>
   </div>
-  </span>
 </template>
 
 <style>
+.rightItemOfcontentToolbar {
+  margin-right: 250px!important;
+}
+#mainContent {
+  margin-left: 250px;
+}
 .v-toolbar__content{
   width: 100%!important;
 }
 
 .contentToolbar{
+  position: fixed!important;
   width: 100%!important;
+  z-index: 100!important;
 }
 .v-toolbar--floating{
   margin:0!important;
@@ -92,6 +90,17 @@
 .filterItemActive{
   background-color: white;
 }
+@media screen and (max-width:1090px) {
+#mainContent{
+  margin:0!important;
+}
+.rightItemOfcontentToolbar {
+  margin-right: 0!important;
+}
+.contentToolbar {
+  margin-left:10px;
+}
+  }
 </style>
 
 <script>

@@ -83,8 +83,8 @@
       <v-layout row wrap>
       <v-flex xs5 sm12 md12>
       <v-menu
-        v-model="menu3"
-        :close-on-content-click="false"
+        :v-model="item.startDateMenu"
+        :close-on-content-click="true"
         :nudge-right="40"
         lazy
         transition="scale-transition"
@@ -95,6 +95,7 @@
         <template v-slot:activator="{ on }">
           <v-text-field
             v-model="date3"
+            class="calendarOnDetail"
             label="Start date"
             readonly
             v-on="on"
@@ -102,14 +103,14 @@
             color="teal lighten-3"
           ></v-text-field>
         </template>
-        <v-date-picker color="teal lighten-3" no-title v-model="date3" @input="menu3 = false"></v-date-picker>
+        <v-date-picker color="teal lighten-3" no-title v-model="date3"></v-date-picker>
       </v-menu>
       </v-flex>
       <v-spacer></v-spacer>
       <v-flex xs5 sm12 md12 class="scheduler">
       <v-menu class="endDate"
-        v-model="menu4"
-        :close-on-content-click="false"
+        :v-model="item.endDateMenu"
+        :close-on-content-click="true"
         :nudge-right="40"
         lazy
         transition="scale-transition"
@@ -120,6 +121,7 @@
         <template v-slot:activator="{ on }">
           <v-text-field
             v-model="date4"
+            class="calendarOnDetail"
             label="Due date"
             readonly
             v-on="on"
@@ -127,7 +129,7 @@
             color="teal lighten-3"
           ></v-text-field>
         </template>
-        <v-date-picker class="date4" color="teal lighten-3" no-title v-model="date4" @input="menu4 = false"></v-date-picker>
+        <v-date-picker class="date4" color="teal lighten-3" no-title v-model="date4"></v-date-picker>
       </v-menu>
       </v-flex>
       </v-layout>
@@ -153,6 +155,7 @@
     </template>
   </v-combobox>
   <v-text-field
+            class="shareUrl"
             value="http://...."
             label="Share"
             prepend-icon="share"
@@ -198,6 +201,13 @@
   </template>
 
   <style>
+  .shareUrl{
+    font-size:13px!important;
+  }
+  .calendarOnDetail{
+    font-size: 13px!important;
+  }
+
   .noteContents{
     height: 300px;
   }
@@ -286,6 +296,8 @@ export default {
         },
       tasks: [
           {
+            startDateMenu:'st1',
+            endDateMenu:'en1',
             due: 'Feb 12th',
             createdAt:'Feb 3th',
             headline: 'Use Vue.js',
@@ -296,6 +308,8 @@ export default {
             subtitle: "Could you check this UI compornemt?"
           },
           {
+            startDateMenu:'st2',
+            endDateMenu:'en2',
             due: 'Mar 22th',
             createdAt:'Feb 5th',
             title: 'Solve select feature',
@@ -305,6 +319,8 @@ export default {
             subtitle: "Did you push to github?"
           },
           {
+            startDateMenu:'st3',
+            endDateMenu:'en3',
             due: 'Mar 23th',
             createdAt:'Feb 10th',
             headline: 'Add upload feature',
@@ -314,6 +330,8 @@ export default {
             title: 'Avatar feature',
           },
           {
+            startDateMenu:'st4',
+            endDateMenu:'en4',
             due: 'Mar 30th',
             createdAt:'Feb 21th',
             headline: 'This is CV',
@@ -324,6 +342,8 @@ export default {
             subtitle: 'Could you update due?'
           },
           {
+            startDateMenu:'st5',
+            endDateMenu:'en5',
             due: 'Apr 1st',
             createdAt:'Feb 25th',
             headline: 'Staf schedule is here',

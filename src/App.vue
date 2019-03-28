@@ -80,11 +80,15 @@ export default {
 }
 </script>
 <style>
-@media screen and (max-width:1023px) {
+@media screen and (max-width:1090px) {
 .is-fullheight{
   padding-top: 47px;
 }
   }
+.application--wrap{
+  background-color: #DFE0E0;
+  width: 100%;
+}
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -97,7 +101,15 @@ export default {
   float: right;
   margin-right: 20px;
 } 
+.is-sidebar-menu.is-hidden-touch{
+  width: 250px;
+}
 .is-sidebar-menu {
+  position: fixed;
+  z-index: 1;
+  min-height: calc(100vh - ( 3.25rem - .75rem ) );
+  max-height: calc(100vh - ( 3.25rem - .75rem ) );
+  height: calc(100vh - ( 3.25rem - .75rem ) );
   padding: 2.5rem;
   background: #4a4a4a;
 }
@@ -114,9 +126,6 @@ export default {
   color: white;
 }
 .columns.is-fullheight {
-  min-height: calc(100vh - ( 3.25rem - .75rem ) );
-  max-height: calc(100vh - ( 3.25rem - .75rem ) );
-  height: calc(100vh - ( 3.25rem - .75rem ) );
   display: flex;
   flex-direction: row;
   justify-content: stretch;
