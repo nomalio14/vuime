@@ -23,7 +23,7 @@
       </v-menu>
 
       </v-subheader>
-        <v-expansion-panel inset>
+        <v-expansion-panel popout>
     <v-expansion-panel-content
       v-for="(item) in tasks"
       :key="item.title"
