@@ -160,6 +160,7 @@
             label="Share"
             prepend-icon="share"
             box
+            color="teal lighten-3"
             readonly
           ></v-text-field>
         <v-layout row wrap>
@@ -186,7 +187,7 @@
                 expanded>
             </b-input>
             <p class="control">
-                <button class="button sendButton">Send</button>
+                <button class="button sendButton is-success">Send</button>
             </p>
         </b-field>
         </v-card>
