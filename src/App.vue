@@ -40,6 +40,7 @@
       </div>
     </nav>
     <body>
+    <div class="mainBody">
     <div class="columns is-fullheight" v-on:click="close">
     <div class="column is-2-desktop is-sidebar-menu is-hidden-touch">
     <sideMenu />
@@ -50,6 +51,7 @@
     </div>
   </transition>
   <router-view></router-view>
+</div>
 </div>
 </body>
 </div>
@@ -80,6 +82,10 @@ export default {
 }
 </script>
 <style>
+.mainBody{
+  width: 97%!important;
+  object-fit: contain!important;
+}
 .vuimeLogo{
   top:5px;
   left:15%;
@@ -122,7 +128,7 @@ export default {
 .columns.is-fullheight .is-hidden-desktop {
   position: absolute;
   overflow-y: auto;
-  z-index: 99;
+  z-index: 101;
     width:80%;
     height:100%;
   -webkit-overflow-scrolling: touch;
@@ -174,9 +180,10 @@ a.navbar-burger.burger {
 body {
   padding-top: 45px; 
   }
+
 @media screen and (max-width:1090px) {
 .is-fullheight{
-  padding-top: 47px;
+  padding-top: 45px;
 }
   }
 

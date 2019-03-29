@@ -45,7 +45,7 @@
               <v-flex xs7 sm10>
               <v-list-tile-content>
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                <v-list-tile-sub-title class="text--primary">{{ item.headline }}</v-list-tile-sub-title>
+                <v-list-tile-sub-title class="text--primary">{{ item.descrtiption }}</v-list-tile-sub-title>
                 <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
               </v-list-tile-content>
               </v-flex>
@@ -81,7 +81,7 @@
         <v-card flat>
       <section>
       <v-layout row wrap>
-      <v-flex xs5 sm12 md12>
+      <v-flex xs5 sm12 md12 class="detailLeftItems">
       <v-menu
         :v-model="item.startDateMenu"
         :close-on-content-click="true"
@@ -107,7 +107,7 @@
       </v-menu>
       </v-flex>
       <v-spacer></v-spacer>
-      <v-flex xs5 sm12 md12 class="scheduler">
+      <v-flex xs5 sm12 md12 class="detailLeftItems">
       <v-menu class="endDate"
         :v-model="item.endDateMenu"
         :close-on-content-click="true"
@@ -143,6 +143,7 @@
             :rules="rules.name"
             color="teal lighten-3"
             multiple
+            class="detailLeftItems"
         >
         <template v-slot:selection="data">
         <v-chip
@@ -155,7 +156,7 @@
     </template>
   </v-combobox>
   <v-text-field
-            class="shareUrl"
+            class="shareUrl detailLeftItems"
             value="http://...."
             label="Share"
             prepend-icon="share"
@@ -202,6 +203,9 @@
   </template>
 
   <style>
+  .detailLeftItems{
+    max-width: 90%!important;
+  }
   .shareUrl{
     font-size:13px!important;
   }
@@ -277,6 +281,12 @@
 hr {
   margin: 0!important;
 }
+
+@media screen and (max-width:1090px) {
+  .detailLeftItems{
+    max-width: 100%!important;
+  }
+  }
   </style>
   <script>
 import addTaskOnPeople from './addTaskOnPeople.vue'
@@ -301,8 +311,9 @@ export default {
             endDateMenu:'en1',
             due: 'Feb 12th',
             createdAt:'Feb 3th',
-            headline: 'Use Vue.js',
+            descrtiption: 'Use Vue.js',
             asignedAvatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+            assignee:'',
             createrName: 'Noma Yuma',
             createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
             title: 'Build people page',
@@ -315,6 +326,7 @@ export default {
             createdAt:'Feb 5th',
             title: 'Solve select feature',
             asignedAvatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+            assignee:'',
             createrName: 'Noma Yuma',
             createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
             subtitle: "Did you push to github?"
@@ -324,8 +336,9 @@ export default {
             endDateMenu:'en3',
             due: 'Mar 23th',
             createdAt:'Feb 10th',
-            headline: 'Add upload feature',
+            descrtiption: 'Add upload feature',
             asignedAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
+            assignee:'',
             createrName: 'Matsui Akira',
             createdAvatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
             title: 'Avatar feature',
@@ -335,9 +348,10 @@ export default {
             endDateMenu:'en4',
             due: 'Mar 30th',
             createdAt:'Feb 21th',
-            headline: 'This is CV',
+            descrtiption: 'This is CV',
             title: '【Primaly】Feedback of Interview',
             asignedAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
+            assignee:'',
             createrName: 'Matsui Akira',
             createdAvatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
             subtitle: 'Could you update due?'
@@ -347,8 +361,9 @@ export default {
             endDateMenu:'en5',
             due: 'Apr 1st',
             createdAt:'Feb 25th',
-            headline: 'Staf schedule is here',
+            descrtiption: 'staff schedule is here',
             asignedAvatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+            assignee:'',
             createrName: 'Noma Yuma',
             createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
             title: 'TB scheduling'

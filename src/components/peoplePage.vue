@@ -21,7 +21,7 @@
       </div>
     </v-toolbar>
     <div>
-    <v-container style="margin-top:64px;">
+    <v-container style="margin-top:64px;" class="mainContentsContainer">
     <div class="contentControl">
     <div class="field is-grouped">
         <v-btn-toggle class="filterItemToggle"  v-model="toggle_exclusive">
@@ -91,6 +91,10 @@
   background-color: white;
 }
 @media screen and (max-width:1090px) {
+.mainContentsContainer{
+  margin-left:7px!important;
+}
+
 #mainContent{
   margin:0!important;
 }
