@@ -23,9 +23,9 @@
       </v-menu>
 
       </v-subheader>
-        <v-expansion-panel>
+        <v-expansion-panel popout>
     <v-expansion-panel-content
-      v-for="(item, index) in tasks"
+      v-for="(item) in tasks"
       :key="item.title"
     >
       <template v-slot:header>
@@ -33,8 +33,6 @@
           <v-list-tile
               ripple
               avatar
-              v-bind:id="['panel' + index]"
-              @click="$vuetify.goTo(target(index), options)"
               >
           <v-list-tile-avatar>
             <v-btn icon @click.native.stop="">
@@ -290,7 +288,6 @@ hr {
   }
   </style>
   <script>
-import * as easings from 'vuetify/es5/util/easing-patterns'
 import addTaskOnPeople from './addTaskOnPeople.vue'
 
 export default {
@@ -298,11 +295,6 @@ export default {
     addTaskOnPeople,
   },
     data: () => ({
-      selector: '#panel4',
-      duration: 100,
-      offset: -300,
-      easing: 'easeInOutCubic',
-      easings: Object.keys(easings),
       date3: new Date().toISOString().substr(0, 10),
       date4: new Date().toISOString().substr(0, 10),
       menu3: false,
@@ -380,27 +372,10 @@ export default {
         
     }),
     methods: {
-      getID: function(el) {
-        let clickedId = 'panel' + el;
-        alert(clickedId);
-      },
-      remove: function (item) {
+      remove (item) {
         this.chips.splice(this.chips.indexOf(item), 1)
         this.chips = [...this.chips]
       },
-      target (index) {
-        return '#panel' + index;
-      },
-    },
-    computed: {
-      options () {
-        return {
-          duration: this.duration,
-          offset: this.offset,
-          easing: this.easing
-        }
-      }
-
     }
   }
   </script>
