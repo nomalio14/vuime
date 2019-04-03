@@ -34,7 +34,7 @@
         </v-btn-toggle>
         <v-spacer></v-spacer>
     <v-flex xs3 sm2>
-        <v-select color="teal lighten-3" :items="items" label="Assigned" class="rightFilter" v-model="Assigned" ></v-select>
+        <v-select color="teal lighten-3" :items="items" class="rightFilter" v-model="Assigned" ></v-select>
       </v-flex>
   </div>
     </div>
@@ -116,8 +116,8 @@ import taskListOnPeople from './taskListOnPeople.vue'
     data: () => ({
       toggle_exclusive: 0,
       dialog: false,
-      Assigned: 'All',
-      items: ['All', 'toMe','DueToday','Completed'],
+      Assigned: 'All open',
+      items: ['All open', 'To me','Due today','Completed'],
     }),
     methods: {
       

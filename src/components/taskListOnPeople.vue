@@ -3,8 +3,9 @@
     <v-flex xs12>
       <v-card>
         <addTaskOnPeople />
+      <!--TaskMain-->
       <v-subheader class="subHeader">
-        <span>All Tasks</span>
+        <span>All oepn tasks</span>
       <v-spacer></v-spacer>
       <v-menu offset-y>
       <template v-slot:activator="{ on }">
@@ -12,6 +13,7 @@
           <v-icon>filter_list</v-icon>
         </v-btn>
       </template>
+      <!--Sort freature-->
       <v-list>
         <v-list-tile
           v-for="(item, index) in sort"
@@ -21,15 +23,15 @@
         </v-list-tile>
       </v-list>
       </v-menu>
-
       </v-subheader>
-        <v-expansion-panel popout>
+      <!--Task list-->
+        <v-expansion-panel>
     <v-expansion-panel-content
       v-for="(item) in tasks"
       :key="item.title"
     >
       <template v-slot:header>
-        <v-list two-line subheader>
+        <v-list class="taskLists">
           <v-list-tile
               ripple
               avatar
@@ -45,7 +47,6 @@
               <v-list-tile-content>
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
                 <v-list-tile-sub-title class="text--primary">{{ item.descrtiption }}</v-list-tile-sub-title>
-                <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
               </v-list-tile-content>
               </v-flex>
               <v-flex xs5 sm2>
@@ -66,6 +67,7 @@
         <v-flex d-flex xs12 sm12 md12>
         <v-card flat>
         <v-subheader>
+      <!--TaskDetail Head-->
         <span>Created by</span>
         <v-list-tile-avatar class="createdAvatar" size="25px">
           <img :src="item.createdAvatar">
@@ -76,10 +78,12 @@
         </v-subheader>
         </v-card>
         </v-flex>
+        <!--TaskDetail Body-->
         <v-flex d-flex xs12 sm3 md3>
         <v-card flat>
       <section>
       <v-layout row wrap>
+        <!--detailLeftItems-->
       <v-flex xs5 sm12 md12 class="detailLeftItems">
       <v-menu
         :v-model="item.startDateMenu"
@@ -163,6 +167,7 @@
             color="teal lighten-3"
             readonly
           ></v-text-field>
+        <!--Button group-->
         <v-layout row wrap>
         <v-flex xs6 text-xs-center>
         <v-btn flat class="DetailButtons">Delete</v-btn>
@@ -178,6 +183,7 @@
         <v-subheader>
         <v-icon>speaker_notes
         </v-icon>
+        <!--Note-->
         <span>Note</span>
         </v-subheader>
         <div class="noteContents"></div>
@@ -202,6 +208,10 @@
   </template>
 
   <style>
+  .taskLists{
+    height: 56px!important;
+    margin-top: 3px!important;
+  }
   .detailLeftItems{
     max-width: 90%!important;
   }

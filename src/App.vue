@@ -21,7 +21,7 @@
         </a>
       </div>
           <div class="navbar-item column is-7-desktop pSearchForm" expanded>
-          <v-text-field box label="Search..." prepend-inner-icon="search" color="teal lighten-3"></v-text-field>
+          <v-text-field box label="Create task with some command" prepend-inner-icon="search" color="teal lighten-3"></v-text-field>
         </div>
           <div class="navbar-item column is-3 is-hidden-touch">
             <div class="buttons is-hidden-touch" id="rightItemOfHeader">
