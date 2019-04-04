@@ -25,6 +25,9 @@
       </v-menu>
       </v-subheader>
       <v-progress-linear :indeterminate="true" v-if="progress" class="progressLinear" height="5" color="teal lighten-4"></v-progress-linear>
+      <v-alert :value="true" type="error" color="grey lighten-1" class="errorAlert" v-if="progresserror">
+      Unable to load the required file.
+    </v-alert>
       <!--Task list-->
         <v-expansion-panel>
     <v-expansion-panel-content
@@ -209,6 +212,9 @@
   </template>
 
   <style>
+  .errorAlert{
+    margin: 0!important;
+  }
   .progressLinear{
     margin:5px 0 0 0!important;
   }
@@ -322,6 +328,7 @@ export default {
         },
       tasks: [],
       progress:true,
+      progresserror:false,
     }),
     methods: {
       remove (item) {
@@ -336,9 +343,10 @@ export default {
           console.log(response.data),
           this.tasks = response.data),
           )
-        .catch(function (error) {
-        console.log(error);
-        })
+        .catch((error, progresserror) => (
+        console.log(error),
+        this.progresserror = true
+        ))
         .then(progress => (
           this.progress = false
         ))
