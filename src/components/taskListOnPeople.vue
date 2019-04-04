@@ -340,7 +340,6 @@ export default {
         console.log(error);
         })
         .then(progress => (
-          console.log("完成"),
           this.progress = false
         ))
     }
