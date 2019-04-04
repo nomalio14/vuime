@@ -179,6 +179,7 @@ a.navbar-burger.burger {
 }
 body {
   padding-top: 45px; 
+  background-color: #E0E0E0;
   }
 
 @media screen and (max-width:1090px) {
