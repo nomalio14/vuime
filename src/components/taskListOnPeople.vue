@@ -24,6 +24,7 @@
       </v-list>
       </v-menu>
       </v-subheader>
+      <v-progress-linear :indeterminate="true" v-if="progress" class="progressLinear" height="5" color="teal lighten-4"></v-progress-linear>
       <!--Task list-->
         <v-expansion-panel>
     <v-expansion-panel-content
@@ -208,6 +209,9 @@
   </template>
 
   <style>
+  .progressLinear{
+    margin:5px 0 0 0!important;
+  }
   .taskLists{
     height: 56px!important;
     margin-top: 3px!important;
@@ -317,7 +321,7 @@ export default {
             name: [val => (val || '').length > 0 || 'This field is required']
         },
       tasks: [],
-        
+      progress:true,
     }),
     methods: {
       remove (item) {
@@ -330,7 +334,15 @@ export default {
         .get('http://127.0.0.1:4321/taskList_wait')
         .then(response => (
           console.log(response.data),
-          this.tasks = response.data));
+          this.tasks = response.data),
+          )
+        .catch(function (error) {
+        console.log(error);
+        })
+        .then(progress => (
+          console.log("完成"),
+          this.progress = false
+        ))
     }
   }
   </script>
