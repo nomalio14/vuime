@@ -35,6 +35,7 @@ mocky.createServer([{
         headers: {'Content-type': 'text/html', 'Access-Control-Allow-Origin': 'http://localhost:8080'},
         body: JSON.stringify([
           {
+            done: false,
             startDateMenu:'st1',
             endDateMenu:'en1',
             due: 'Feb 12th',
@@ -48,6 +49,7 @@ mocky.createServer([{
             subtitle: "Could you check this UI compornemt?"
           },
           {
+            done: true,
             startDateMenu:'st2',
             endDateMenu:'en2',
             due: 'Mar 22th',
@@ -60,6 +62,7 @@ mocky.createServer([{
             subtitle: "Did you push to github?"
           },
           {
+            done: false,
             startDateMenu:'st3',
             endDateMenu:'en3',
             due: 'Mar 23th',
@@ -72,6 +75,7 @@ mocky.createServer([{
             title: 'Avatar feature',
           },
           {
+            done: false,
             startDateMenu:'st4',
             endDateMenu:'en4',
             due: 'Mar 30th',
@@ -85,6 +89,7 @@ mocky.createServer([{
             subtitle: 'Could you update due?'
           },
           {
+            done: false,
             startDateMenu:'st5',
             endDateMenu:'en5',
             due: 'Apr 1st',
@@ -100,7 +105,7 @@ mocky.createServer([{
           
         ])
       });
-    }, 5000);
+    }, 1000);
   }
 },
 {
