@@ -43,7 +43,7 @@
             </v-flex>
           </div>
         </div>
-        <taskListOnPeople />
+        <taskListOnPeople v-bind:filter-type="filter" />
       </v-container>
     </div>
   </div>
@@ -122,11 +122,11 @@ export default {
     toggle_exclusive: 0,
     dialog: false,
     filter: 'All open',
-    items: ['All open', 'To me', 'Due today', 'Completed']
+    items: ['All open', 'To me', 'Due today', 'Completed', 'All']
   }),
   methods: {
     changeFilter: function() {
-      console.log(this.filter);
+      console.log(this.filter)
     }
   }
 }
