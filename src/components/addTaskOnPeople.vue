@@ -10,10 +10,12 @@
         Create Task
       </v-card-title>
       <div class="container">
+        <v-form ref="form">
         <v-text-field
           label="Task name"
           :rules="rules.name"
           color="teal lighten-3"
+          v-model="createList.title"
           id="title"
         ></v-text-field>
         <v-textarea
@@ -21,8 +23,10 @@
           label="Description"
           rows="1"
           color="teal lighten-3"
+          v-model="createList.description"
           id="description"
         ></v-textarea>
+        </v-form>
         <v-combobox
           v-model="chips"
           :items="items"
@@ -105,7 +109,7 @@
           <v-btn flat @click="dialog = false">
             Cancel
           </v-btn>
-          <v-btn color="teal lighten-3" dark depressed @click="addTask(); dialog = false">
+          <v-btn color="teal lighten-3" dark depressed @click="addTask()">
             Create
           </v-btn>
         </v-card-actions>
@@ -137,7 +141,10 @@ export default {
       endDate: new Date().toISOString().substr(0, 10),
       menu1: false,
       menu2: false,
-      addList: [],
+      createList: {
+        title: "",
+        description: ""
+      },
     }
   },
   props: {
@@ -149,8 +156,8 @@ export default {
       this.chips = [...this.chips]
     },
     addTask(){
-      const title = document.getElementById("title").value
-      const description = document.getElementById("description").value
+      const title = this.createList.title
+      const description = this.createList.description
       const assignee = this.chips
       const startDate = this.startDate
       const endDate = this.endDate
@@ -175,7 +182,10 @@ export default {
                 title: title
               }
       this.$emit('add-list', newList)
+      this.dialog = false
+      this.$refs.form.reset()
+      this.chips = ['Mtsui Akira']
+      }
     }
   }
-}
 </script>
