@@ -41,7 +41,7 @@
         <v-expansion-panel v-model="panel" expand>
           <v-expansion-panel-content
             v-for="item in filteredTasks"
-            :key="index"
+            :key="item.id"
           >
             <template v-slot:header>
               <v-list class="taskLists">
@@ -207,7 +207,7 @@
                           dark
                           class="DetailButtons"
                           color="teal lighten-3"
-                          @click="taskDoneToggle(item.id)"
+                          @click="taskDoneByCompleteButton(item.id)"
                           >Complete</v-btn
                         >
                         <v-btn
@@ -350,6 +350,7 @@ hr {
 <script>
 import addTaskOnPeople from './addTaskOnPeople.vue'
 import axios from 'axios'
+import { setTimeout } from 'timers';
 
 export default {
   components: {
@@ -407,10 +408,12 @@ export default {
     taskDoneToggle(id) {
       this.tasks[id].done = !this.tasks[id].done
     },
+    taskDoneByCompleteButton(id) {
+      this.panel = []
+      setTimeout(this.taskDoneToggle(id), 1000)
+    },
     deleteTask(id) {
       this.tasks.splice(id, 1)
-      // Deleteしたらexpansionが閉まるようにする
-      // https://vuetifyjs.com/en/components/expansion-panels#external-control
       this.panel = []
     }
   },
