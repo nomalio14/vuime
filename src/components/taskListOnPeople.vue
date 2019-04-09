@@ -38,10 +38,10 @@
           Unable to load the required file.
         </v-alert>
         <!--Task list-->
-        <v-expansion-panel v-model="panel" expand>
+        <v-expansion-panel v-model="panel">
           <v-expansion-panel-content
             v-for="item in filteredTasks"
-            :key="item.id"
+            :key="item.index"
           >
             <template v-slot:header>
               <v-list class="taskLists">
