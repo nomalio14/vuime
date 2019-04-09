@@ -413,7 +413,9 @@ export default {
       setTimeout(this.taskDoneToggle(id), 1000)
     },
     deleteTask(id) {
-      this.tasks.splice(id, 1)
+      const idArray = this.tasks.map(elm => elm.id)
+      const deleteIndex = idArray.indexOf(id)
+      this.tasks.splice(deleteIndex, 1)
       this.panel = []
     }
   },
