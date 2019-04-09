@@ -15,7 +15,7 @@
             </template>
             <!--Sort freature-->
             <v-list>
-              <v-list-tile v-for="(item, index) in sort" :key="index">
+              <v-list-tile @click="chageSort(item, index)" v-for="(item, index) in sort" :key="index">
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
@@ -417,6 +417,9 @@ export default {
       const deleteIndex = idArray.indexOf(id)
       this.tasks.splice(deleteIndex, 1)
       this.panel = []
+    },
+    chageSort(item, index) {
+      console.log(index);
     }
   },
   mounted() {
