@@ -46,9 +46,7 @@ mocky
               {
                 id: 0,
                 done: false,
-                startDateMenu: 'st1',
-                endDateMenu: 'en1',
-                due: 'Feb 12th',
+                due: '2019-05-09',
                 createdAt: 'Feb 3th',
                 descrtiption: 'Use Vue.js',
                 asignedAvatar:
@@ -62,9 +60,7 @@ mocky
               {
                 id: 1,
                 done: true,
-                startDateMenu: 'st2',
-                endDateMenu: 'en2',
-                due: 'Mar 22th',
+                due: '2019-04-11',
                 createdAt: 'Feb 5th',
                 title: 'Solve select feature',
                 asignedAvatar:
@@ -77,9 +73,7 @@ mocky
               {
                 id: 2,
                 done: false,
-                startDateMenu: 'st3',
-                endDateMenu: 'en3',
-                due: 'Mar 23th',
+                due: '2019-06-11',
                 createdAt: 'Feb 10th',
                 descrtiption: 'Add upload feature',
                 asignedAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
@@ -92,9 +86,7 @@ mocky
               {
                 id: 3,
                 done: false,
-                startDateMenu: 'st4',
-                endDateMenu: 'en4',
-                due: 'Mar 30th',
+                due: '2019-11-01',
                 createdAt: 'Feb 21th',
                 descrtiption: 'This is CV',
                 title: '【Primaly】Feedback of Interview',
@@ -108,9 +100,7 @@ mocky
               {
                 id: 4,
                 done: false,
-                startDateMenu: 'st5',
-                endDateMenu: 'en5',
-                due: 'Apr 1st',
+                due: '2020-01-11',
                 createdAt: 'Feb 25th',
                 descrtiption: 'staff schedule is here',
                 asignedAvatar:

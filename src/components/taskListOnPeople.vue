@@ -2,7 +2,7 @@
   <v-layout>
     <v-flex xs12>
       <v-card>
-        <addTaskOnPeople />
+        <addTaskOnPeople v-bind:task-array="tasks" @add-list="getList"/>
         <!--TaskMain-->
         <v-subheader class="subHeader">
           <span>All oepn tasks</span>
@@ -15,7 +15,7 @@
             </template>
             <!--Sort freature-->
             <v-list>
-              <v-list-tile @click="chageSort(item, index)" v-for="(item, index) in sort" :key="index">
+              <v-list-tile @click="changeSort(item, index)" v-for="(item, index) in sort" :key="index">
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
@@ -70,7 +70,7 @@
                         <img :src="item.asignedAvatar" />
                       </v-list-tile-avatar>
                       <v-list-tile-action-text class="due">{{
-                        item.due
+                        item.due | duedateFormat
                       }}</v-list-tile-action-text>
                     </div>
                   </v-flex>
@@ -349,6 +349,7 @@ hr {
 </style>
 <script>
 import addTaskOnPeople from './addTaskOnPeople.vue'
+import moment from 'moment'
 import axios from 'axios'
 import { setTimeout } from 'timers';
 
@@ -371,10 +372,15 @@ export default {
     },
     tasks: [],
     progress: true,
-    progresserror: false
+    progresserror: false,
   }),
   props: {
     filterType: String,
+  },
+  filters:{
+    duedateFormat: function (date) {
+            return moment(date).format('MMM Do');
+    }
   },
   computed: {
     // existing values
@@ -418,8 +424,12 @@ export default {
       this.tasks.splice(deleteIndex, 1)
       this.panel = []
     },
-    chageSort(item, index) {
+    changeSort(item, index) {
       console.log(index);
+    },
+    getList(newList){
+      console.log(newList)
+      this.tasks.push(newList)
     }
   },
   mounted() {

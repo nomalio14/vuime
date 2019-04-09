@@ -14,12 +14,14 @@
           label="Task name"
           :rules="rules.name"
           color="teal lighten-3"
+          id="title"
         ></v-text-field>
         <v-textarea
           box
           label="Description"
           rows="1"
           color="teal lighten-3"
+          id="description"
         ></v-textarea>
         <v-combobox
           v-model="chips"
@@ -103,7 +105,7 @@
           <v-btn flat @click="dialog = false">
             Cancel
           </v-btn>
-          <v-btn color="teal lighten-3" dark depressed @click="dialog = false">
+          <v-btn color="teal lighten-3" dark depressed @click="addTask(); dialog = false">
             Create
           </v-btn>
         </v-card-actions>
@@ -134,13 +136,45 @@ export default {
       startDate: new Date().toISOString().substr(0, 10),
       endDate: new Date().toISOString().substr(0, 10),
       menu1: false,
-      menu2: false
+      menu2: false,
+      addList: [],
     }
+  },
+  props: {
+    taskArray: Array,
   },
   methods: {
     remove(item) {
       this.chips.splice(this.chips.indexOf(item), 1)
       this.chips = [...this.chips]
+    },
+    addTask(){
+      const title = document.getElementById("title").value
+      const description = document.getElementById("description").value
+      const assignee = this.chips
+      const startDate = this.startDate
+      const endDate = this.endDate
+      //新しいIDの生成
+      const tasksLength = this.taskArray.length;
+      const endIndex = tasksLength - 1
+      const endId = this.taskArray[endIndex].id
+      const newId = endId + 1
+      //新しいリストの生成
+      const newList = {
+                id: newId,
+                done: false,
+                startDate: startDate,
+                due: endDate,
+                createdAt: new Date(),
+                descrtiption: description,
+                asignedAvatar:
+                  'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+                assignee: assignee,
+                createrName: 'Noma Yuma',
+                createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
+                title: title
+              }
+      this.$emit('add-list', newList)
     }
   }
 }
