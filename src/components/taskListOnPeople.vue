@@ -38,17 +38,20 @@
           Unable to load the required file.
         </v-alert>
         <!--Task list-->
-        <v-expansion-panel>
-          <v-expansion-panel-content v-for="(item, index) in tasks" :key="index">
+        <v-expansion-panel v-model="panel" expand>
+          <v-expansion-panel-content
+            v-for="item in filteredTasks"
+            :key="index"
+          >
             <template v-slot:header>
               <v-list class="taskLists">
                 <v-list-tile ripple avatar>
                   <v-list-tile-avatar>
-                    <v-btn icon @click.native.stop="taskDoneToggle(index)">
-                      <v-icon v-if=!item.done medium color="grey lighten-1">
+                    <v-btn icon @click.native.stop="taskDoneToggle(item.id)">
+                      <v-icon v-if="!item.done" medium color="grey lighten-1">
                         check_circle_outline
                       </v-icon>
-                      <v-icon v-if=item.done medium color="teal lighten-3">
+                      <v-icon v-if="item.done" medium color="teal lighten-3">
                         check_circle_outline
                       </v-icon>
                     </v-btn>
@@ -195,25 +198,25 @@
                     <!--Button group-->
                     <v-layout row wrap>
                       <v-flex xs6 text-xs-center>
-                        <v-btn flat class="DetailButtons">Delete</v-btn>
+                        <v-btn flat class="DetailButtons" @click="deleteTask(item.id)">Delete</v-btn>
                       </v-flex>
                       <v-flex xs6 text-xs-center>
                         <v-btn
-                          v-if=!item.done
+                          v-if="!item.done"
                           depressed
                           dark
                           class="DetailButtons"
                           color="teal lighten-3"
-                          @click="taskDoneToggle(index)"
+                          @click="taskDoneToggle(item.id)"
                           >Complete</v-btn
                         >
                         <v-btn
-                          v-if=item.done
+                          v-if="item.done"
                           depressed
                           dark
                           class="DetailButtons"
                           color="grey darken-2"
-                          @click="taskDoneToggle(index)"
+                          @click="taskDoneToggle(item.id)"
                           >Open again</v-btn
                         >
                       </v-flex>
@@ -353,11 +356,13 @@ export default {
     addTaskOnPeople
   },
   data: () => ({
+    panel: [],
     date3: new Date().toISOString().substr(0, 10),
     date4: new Date().toISOString().substr(0, 10),
     menu3: false,
     menu4: false,
     sort: [{ title: 'Newest' }, { title: 'Due' }],
+    sortKey: '',
     chips: ['Mtsui Akira'],
     items: ['Noma Yuma', 'Mtsui Akira'],
     rules: {
@@ -367,21 +372,52 @@ export default {
     progress: true,
     progresserror: false
   }),
+  props: {
+    filterType: String,
+  },
+  computed: {
+    // existing values
+    // items: ['All open', 'To me', 'Due today', 'Completed', 'All']
+    filteredTasks: function() {
+      switch (this.filterType) {
+        case 'All open': 
+          return this.tasks.filter((task) => {
+            return task.done !== true 
+            },this);
+          break;
+        case 'Completed': 
+          return this.tasks.filter((task) => {
+            return task.done === true 
+            },this);
+          break;
+        case 'All': 
+          return this.tasks
+          break;
+        // Others
+        default: 
+          return this.tasks
+      }
+    }
+  },
   methods: {
     remove(item) {
       this.chips.splice(this.chips.indexOf(item), 1)
       this.chips = [...this.chips]
     },
-    taskDoneToggle(el) {
-      this.tasks[el].done = !this.tasks[el].done;
+    taskDoneToggle(id) {
+      this.tasks[id].done = !this.tasks[id].done
+    },
+    deleteTask(id) {
+      this.tasks.splice(id, 1)
+      // Deleteしたらexpansionが閉まるようにする
+      // https://vuetifyjs.com/en/components/expansion-panels#external-control
+      this.panel = []
     }
   },
   mounted() {
     axios
       .get('http://127.0.0.1:4321/taskList_wait')
-      .then(
-        response => ((this.tasks = response.data))
-      )
+      .then(response => (this.tasks = response.data))
       .catch(
         (error, progresserror) => (
           console.log(error), (this.progresserror = true)
