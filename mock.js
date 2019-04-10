@@ -45,6 +45,7 @@ mocky
             body: JSON.stringify([
               {
                 id: 0,
+                isEdit: false,
                 done: false,
                 due: '2019-05-09',
                 createdAt: 'Feb 3th',
@@ -59,6 +60,7 @@ mocky
               },
               {
                 id: 1,
+                isEdit: false,
                 done: true,
                 due: '2019-04-11',
                 createdAt: 'Feb 5th',
@@ -72,6 +74,7 @@ mocky
               },
               {
                 id: 2,
+                isEdit: false,
                 done: false,
                 due: '2019-06-11',
                 createdAt: 'Feb 10th',
@@ -85,6 +88,7 @@ mocky
               },
               {
                 id: 3,
+                isEdit: false,
                 done: false,
                 due: '2019-11-01',
                 createdAt: 'Feb 21th',
@@ -99,6 +103,7 @@ mocky
               },
               {
                 id: 4,
+                isEdit: false,
                 done: false,
                 due: '2020-01-11',
                 createdAt: 'Feb 25th',

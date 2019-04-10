@@ -56,24 +56,24 @@
                       </v-icon>
                     </v-btn>
                   </v-list-tile-avatar>
-                  <v-flex xs7 sm10>
+                  <v-flex xs7 sm8>
                     <v-list-tile-content>
-                      <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                      <v-list-tile-sub-title class="text--primary">{{
-                        item.descrtiption
-                      }}</v-list-tile-sub-title>
+                      <v-list-tile-title v-if="!item.isEdit">{{ item.title }}</v-list-tile-title>
+                      <v-text-field prepend-inner-icon="edit" :rules="rules.name" color="teal lighten-3" class="editTitle" single-line label="Task name" @click.stop="" v-if="item.isEdit" v-model="item.title"></v-text-field>
                     </v-list-tile-content>
                   </v-flex>
-                  <v-flex xs5 sm2>
-                    <div class="listRightItems">
-                      <v-list-tile-avatar size="30px">
-                        <img :src="item.asignedAvatar" />
-                      </v-list-tile-avatar>
-                      <v-list-tile-action-text class="due">{{
+                  <v-flex xs4 sm4>
+                    <div class="dueBox">
+                      <span class="due">{{
                         item.due | duedateFormat
-                      }}</v-list-tile-action-text>
-                    </div>
-                  </v-flex>
+                      }}</span>
+                      </div>
+                      <div class="listRightItems">
+                      <v-avatar size="30px" class="listAvatar">
+                        <img :src="item.asignedAvatar" />
+                      </v-avatar>
+                      </div>
+                    </v-flex>
                 </v-list-tile>
               </v-list>
             </template>
@@ -252,6 +252,12 @@
 </template>
 
 <style>
+.v-list__tile--avatar{
+  height: 45px!important;
+}
+.editTitle {
+  width: 70%!important;
+}
 .errorAlert {
   margin: 0 !important;
 }
@@ -259,7 +265,7 @@
   margin: 5px 0 0 0 !important;
 }
 .taskLists {
-  height: 56px !important;
+  height: 45px !important;
   margin-top: 3px !important;
 }
 .detailLeftItems {
@@ -271,7 +277,6 @@
 .calendarOnDetail {
   font-size: 13px !important;
 }
-
 .noteContents {
   height: 300px;
 }
@@ -294,7 +299,6 @@
 .detailHeadName {
   color: #212121 !important;
 }
-
 .detailContainer {
   padding: 0 24px !important;
   padding-bottom: 10px !important;
@@ -306,13 +310,11 @@
 .createdTimeAt {
   text-align: center;
 }
-
 .taskDetailHead {
   background-color: #b2dfdb;
   width: 100%;
   color: white;
 }
-
 .taskDetail {
   position: relative;
   margin: auto;
@@ -327,7 +329,6 @@
 .subHeader {
   height: 30px !important;
 }
-
 .v-expansion-panel__header {
   display: initial !important;
   display: -webkit-box !important;
@@ -336,15 +337,27 @@
 }
 .due {
   text-align: center !important;
+  font-size: 13px!important;
+  color: #424242!important;
+  width: 30%!important;
+}
+.dueBox{ 
+  float: right !important;
+  width: 50px;
+}
+.listAvatar {
+  margin-right: 10px;
 }
 hr {
   margin: 0 !important;
 }
-
 @media screen and (max-width: 1090px) {
   .detailLeftItems {
     max-width: 100% !important;
   }
+  .editTitle {
+  width: 100%!important;
+}
 }
 </style>
 <script>
@@ -352,12 +365,12 @@ import addTaskOnPeople from './addTaskOnPeople.vue'
 import moment from 'moment'
 import axios from 'axios'
 import { setTimeout } from 'timers';
-
 export default {
   components: {
     addTaskOnPeople
   },
   data: () => ({
+    isEdit: false,
     panel: [],
     date3: new Date().toISOString().substr(0, 10),
     date4: new Date().toISOString().substr(0, 10),
@@ -368,7 +381,7 @@ export default {
     chips: ['Mtsui Akira'],
     items: ['Noma Yuma', 'Mtsui Akira'],
     rules: {
-      name: [val => (val || '').length > 0 || 'This field is required']
+      name: [val => (val || '').length > 0 || '']
     },
     tasks: [],
     progress: true,
@@ -413,16 +426,17 @@ export default {
     },
     taskDoneToggle(id) {
       this.tasks[id].done = !this.tasks[id].done
+      this.panel = null
     },
     taskDoneByCompleteButton(id) {
-      this.panel = []
+      this.panel = null
       setTimeout(this.taskDoneToggle(id), 1000)
     },
     deleteTask(id) {
       const idArray = this.tasks.map(elm => elm.id)
       const deleteIndex = idArray.indexOf(id)
       this.tasks.splice(deleteIndex, 1)
-      this.panel = []
+      this.panel = null
     },
     changeSort(item, index) {
       console.log(index);
@@ -430,7 +444,21 @@ export default {
     getList(newList){
       console.log(newList)
       this.tasks.push(newList)
-    }
+    },
+  },
+  watch: {
+  panel: function() {
+    const panelId = this.panel
+    if(panelId == null) {
+      this.tasks.forEach(elm => elm.isEdit = false)
+    }else{
+      this.tasks.forEach(elm => elm.isEdit = false)
+      const targetTaskId = this.filteredTasks[panelId].id
+      const idArray = this.tasks.map(elm => elm.id)
+      const editIndex = idArray.indexOf(targetTaskId)
+      this.tasks[editIndex].isEdit = true
+  }
+  }
   },
   mounted() {
     axios

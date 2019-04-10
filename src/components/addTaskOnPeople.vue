@@ -169,6 +169,7 @@ export default {
       //新しいリストの生成
       const newList = {
                 id: newId,
+                isEdit: false,
                 done: false,
                 startDate: startDate,
                 due: endDate,
