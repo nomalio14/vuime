@@ -91,7 +91,7 @@
                       </v-list-tile-avatar>
                       <span class="detailHeadName">{{ item.createrName }}</span>
                       <span class="createdAvatar createdTimeAt">at</span>
-                      <span class="detailHeadName">{{ item.createdAt }}</span>
+                      <span class="detailHeadName">{{ item.createdAt.toLocaleString() | duedateFormat }}</span>
                     </v-subheader>
                   </v-card>
                 </v-flex>
@@ -103,7 +103,7 @@
                         <!--detailLeftItems-->
                         <v-flex xs5 sm12 md12 class="detailLeftItems">
                           <v-menu
-                            :v-model="item.startDateMenu"
+                            :v-model="item.startDate"
                             :close-on-content-click="true"
                             :nudge-right="40"
                             lazy
@@ -114,7 +114,7 @@
                           >
                             <template v-slot:activator="{ on }">
                               <v-text-field
-                                v-model="date3"
+                                v-model="item.startDate"
                                 class="calendarOnDetail"
                                 label="Start date"
                                 readonly
@@ -126,7 +126,8 @@
                             <v-date-picker
                               color="teal lighten-3"
                               no-title
-                              v-model="date3"
+                              v-model="item.startDate"
+                              @input="inputedStartDate(item.id)"
                             ></v-date-picker>
                           </v-menu>
                         </v-flex>
@@ -134,7 +135,7 @@
                         <v-flex xs5 sm12 md12 class="detailLeftItems">
                           <v-menu
                             class="endDate"
-                            :v-model="item.endDateMenu"
+                            :v-model="item.due"
                             :close-on-content-click="true"
                             :nudge-right="40"
                             lazy
@@ -145,7 +146,7 @@
                           >
                             <template v-slot:activator="{ on }">
                               <v-text-field
-                                v-model="date4"
+                                v-model="item.due"
                                 class="calendarOnDetail"
                                 label="Due date"
                                 readonly
@@ -155,17 +156,19 @@
                               ></v-text-field>
                             </template>
                             <v-date-picker
+                              :show-current="false"
+                              :min="item.startDate"
                               class="date4"
                               color="teal lighten-3"
                               no-title
-                              v-model="date4"
+                              v-model="item.due"
                             ></v-date-picker>
                           </v-menu>
                         </v-flex>
                       </v-layout>
                     </section>
                     <v-combobox
-                      v-model="chips"
+                      v-model="item.assignee"
                       prepend-icon="people"
                       :items="items"
                       label="Assigned to"
@@ -256,7 +259,7 @@
   height: 45px!important;
 }
 .editTitle {
-  width: 70%!important;
+  width: 60%!important;
 }
 .errorAlert {
   margin: 0 !important;
@@ -343,7 +346,7 @@
 }
 .dueBox{ 
   float: right !important;
-  width: 50px;
+  width: 56px;
 }
 .listAvatar {
   margin-right: 10px;
@@ -442,8 +445,15 @@ export default {
       console.log(index);
     },
     getList(newList){
-      console.log(newList)
+      //console.log(newList)
       this.tasks.push(newList)
+    },
+    inputedStartDate(id) {
+      const idArray = this.tasks.map(elm => elm.id)
+      const inputedIndex = idArray.indexOf(id)
+      if (this.tasks[inputedIndex].startDate > this.tasks[inputedIndex].due){
+      this.tasks[inputedIndex].due　= this.tasks[inputedIndex].startDate
+      }
     },
   },
   watch: {
@@ -463,13 +473,14 @@ export default {
   mounted() {
     axios
       .get('http://127.0.0.1:4321/taskList_wait')
-      .then(response => (this.tasks = response.data))
+      .then(response => (this.tasks = response.data, this.progress = false))
       .catch(
-        (error, progresserror) => (
-          console.log(error), (this.progresserror = true)
+        error => (
+          console.log(error), this.progresserror = true
         )
       )
-      .then(progress => (this.progress = false))
+      .then(() => (this.progress = false))
+
   }
 }
 </script>

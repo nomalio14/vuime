@@ -12,27 +12,25 @@
       <div class="container">
         <v-form ref="form">
         <v-text-field
+          :error-messages="titleErrors"
           label="Task name"
-          :rules="rules.name"
           color="teal lighten-3"
-          v-model="createList.title"
+          v-model="title"
           id="title"
+          @input="$v.title.$touch()"
+          @blur="$v.title.$touch()"
+          required
         ></v-text-field>
-        <v-textarea
-          box
-          label="Description"
-          rows="1"
-          color="teal lighten-3"
-          v-model="createList.description"
-          id="description"
-        ></v-textarea>
         </v-form>
         <v-combobox
+          :error-messages="assignErrors"
+          @input="$v.chips.$touch()"
+          @blur="$v.chips.$touch()"
+          required
           v-model="chips"
           :items="items"
-          label="Assigned to"
+          label="Assign to"
           chips
-          :rules="rules.name"
           color="teal lighten-3"
           clearable
           multiple
@@ -68,7 +66,7 @@
               <v-date-picker
                 color="teal lighten-3"
                 v-model="startDate"
-                @input="menu1 = false"
+                @input="menu1 = false; endDate = startDate"
               ></v-date-picker>
             </v-menu>
           </v-flex>
@@ -95,6 +93,8 @@
                 ></v-text-field>
               </template>
               <v-date-picker
+                :show-current="false"
+                :min="startDate"
                 color="teal lighten-3"
                 v-model="endDate"
                 @input="menu2 = false"
@@ -106,7 +106,7 @@
       <div class="container">
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn flat @click="dialog = false">
+          <v-btn flat @click="createCancel()">
             Cancel
           </v-btn>
           <v-btn color="teal lighten-3" dark depressed @click="addTask()">
@@ -124,14 +124,23 @@
 </style>
 
 <script>
+import { validationMixin } from 'vuelidate'
+import { required, maxLength, email } from 'vuelidate/lib/validators'
+
 export default {
+  mixins: [validationMixin],
+  validations: {
+    title: { required },
+    chips: { required },
+  },
+
   data() {
     const defaultForm = Object.freeze({
       first: ''
     })
     return {
       form: Object.assign({}, defaultForm),
-      chips: ['Mtsui Akira'],
+      chips: '',
       items: ['Noma Yuma', 'Mtsui Akira'],
       rules: {
         name: [val => (val || '').length > 0 || 'This field is required']
@@ -141,23 +150,45 @@ export default {
       endDate: new Date().toISOString().substr(0, 10),
       menu1: false,
       menu2: false,
-      createList: {
-        title: "",
-        description: ""
-      },
+      title: "",
     }
   },
   props: {
     taskArray: Array,
+  },
+  computed: {
+    titleErrors () {
+        const errors = []
+        if (!this.$v.title.$dirty) return errors
+        !this.$v.title.required && errors.push('This field is required.')
+        return errors
+      },
+    assignErrors () {
+        const errors = []
+        if (!this.$v.chips.$dirty) return errors
+        !this.$v.chips.required && errors.push('This field is required.')
+        return errors
+      },
   },
   methods: {
     remove(item) {
       this.chips.splice(this.chips.indexOf(item), 1)
       this.chips = [...this.chips]
     },
+    createCancel(){
+      this.dialog = false
+      this.$refs.form.reset()
+      this.$v.$reset()
+      this.chips = ''
+      this.startDate = new Date().toISOString().substr(0, 10)
+      this.endDate = new Date().toISOString().substr(0, 10)
+    },
     addTask(){
-      const title = this.createList.title
-      const description = this.createList.description
+      this.$v.$touch()
+      if (this.$v.$invalid) {
+
+      } else {
+      const title = this.title
       const assignee = this.chips
       const startDate = this.startDate
       const endDate = this.endDate
@@ -166,6 +197,9 @@ export default {
       const endIndex = tasksLength - 1
       const endId = this.taskArray[endIndex].id
       const newId = endId + 1
+      //現在時間の取得
+      const date = new Date()
+      const UTCdate = date.toUTCString()
       //新しいリストの生成
       const newList = {
                 id: newId,
@@ -173,8 +207,7 @@ export default {
                 done: false,
                 startDate: startDate,
                 due: endDate,
-                createdAt: new Date(),
-                descrtiption: description,
+                createdAt: UTCdate,
                 asignedAvatar:
                   'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
                 assignee: assignee,
@@ -185,8 +218,11 @@ export default {
       this.$emit('add-list', newList)
       this.dialog = false
       this.$refs.form.reset()
-      this.chips = ['Mtsui Akira']
-      }
+      this.$v.$reset()
+      this.chips = ''
+      this.startDate = new Date().toISOString().substr(0, 10)
+      this.endDate = new Date().toISOString().substr(0, 10)
+      }}
     }
   }
 </script>

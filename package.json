@@ -16,18 +16,16 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",
-    "@vue/cli-plugin-eslint": "^3.5.0",
     "@vue/cli-service": "^3.5.0",
     "autoprefixer": "^7.1.2",
     "babel-eslint": "^10.0.1",
     "buefy": "^0.6.6",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0",
     "mocky": "^0.1.11",
     "moment": "^2.24.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.21",
+    "vuelidate": "^0.7.4",
     "webpack": "^4.29.6",
     "webpack-merge": "^4.1.0"
   },
@@ -40,7 +38,9 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "no-console": 0
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
