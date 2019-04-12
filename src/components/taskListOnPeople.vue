@@ -56,10 +56,11 @@
                       </v-icon>
                     </v-btn>
                   </v-list-tile-avatar>
-                  <v-flex xs7 sm8>
+                  <v-flex xs6 sm8>
                     <v-list-tile-content>
                       <v-list-tile-title v-if="!item.isEdit">{{ item.title }}</v-list-tile-title>
-                      <v-text-field prepend-inner-icon="edit" :rules="rules.name" color="teal lighten-3" class="editTitle" single-line label="Task name" @click.stop="" v-if="item.isEdit" v-model="item.title"></v-text-field>
+                      <v-text-field v-bind:style="editStyle" v-on="titleInput(item.id)" prepend-inner-icon="edit" :rules="rules.name" color="teal lighten-3" class="editTitle" single-line label="Task name" @click.stop="" v-if="item.isEdit" v-model="item.title"></v-text-field>
+                      <span ref="hidden" v-bind:id="'edit-id' + item.id" class="checkEditWidth">{{ item.title }}</span>
                     </v-list-tile-content>
                   </v-flex>
                   <v-flex xs4 sm4>
@@ -255,11 +256,16 @@
 </template>
 
 <style>
+.checkEditWidth{
+  visibility: hidden;
+  position: fixed;
+  white-space: nowrap;
+}
 .v-list__tile--avatar{
   height: 45px!important;
 }
 .editTitle {
-  width: 60%!important;
+  min-width: 120px!important;
 }
 .errorAlert {
   margin: 0 !important;
@@ -359,7 +365,7 @@ hr {
     max-width: 100% !important;
   }
   .editTitle {
-  width: 100%!important;
+  max-width: 100%!important;
 }
 }
 </style>
@@ -374,6 +380,7 @@ export default {
   },
   data: () => ({
     isEdit: false,
+    editStyle: '',
     panel: [],
     date3: new Date().toISOString().substr(0, 10),
     date4: new Date().toISOString().substr(0, 10),
@@ -423,6 +430,10 @@ export default {
     }
   },
   methods: {
+    titleInput(e) {
+      const targetEl = document.getElementById('edit-id' + e)
+      this.editStyle = `width: ${targetEl.clientWidth + 50}px;!important`
+    },
     remove(item, id) {
       const idArray = this.tasks.map(elm => elm.id)
       const removeIndex = idArray.indexOf(id)
