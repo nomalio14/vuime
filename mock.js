@@ -4,7 +4,7 @@ mocky
   .createServer([
     {
       // simple GET route without request body to match
-      url: '/profile',
+      url: '/users',
       method: 'get',
       headers: { 'Content-type': 'text/json' },
       res: {
@@ -13,20 +13,9 @@ mocky
           'Content-type': 'text/html',
           'Access-Control-Allow-Origin': 'http://localhost:8080'
         },
-        body: JSON.stringify({
-          startDateMenu: 'st1',
-          endDateMenu: 'en1',
-          due: 'Feb 12th',
-          createdAt: 'Feb 3th',
-          descrtiption: 'Use Vue.js',
-          asignedAvatar:
-            'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-          assignee: '',
-          createrName: 'Noma Yuma',
-          createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
-          title: 'Build people page',
-          subtitle: 'Could you check this UI compornemt?'
-        })
+        body: JSON.stringify(
+          ['Noma Yuma', 'Matsui Akira']
+          )
       }
     },
     {
@@ -52,7 +41,7 @@ mocky
                 createdAt: '2019-05-09',
                 asignedAvatar:
                   'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-                assignee: ['Mtsui Akira'],
+                assignee: ['Matsui Akira'],
                 createrName: 'Noma Yuma',
                 createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
                 title: 'Build people page',
@@ -67,7 +56,7 @@ mocky
                 title: 'Solve select feature',
                 asignedAvatar:
                   'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-                assignee: ['Mtsui Akira'],
+                assignee: ['Matsui Akira'],
                 createrName: 'Noma Yuma',
                 createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
               },
@@ -79,7 +68,7 @@ mocky
                 startDate: '2019-10-14',
                 createdAt: '2019-05-09',
                 asignedAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
-                assignee: ['Mtsui Akira'],
+                assignee: ['Matsui Akira'],
                 createrName: 'Matsui Akira',
                 createdAvatar:
                   'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
@@ -94,7 +83,7 @@ mocky
                 createdAt: '2019-05-09',
                 title: '【Primaly】Feedback of Interview',
                 asignedAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
-                assignee: ['Mtsui Akira'],
+                assignee: ['Matsui Akira'],
                 createrName: 'Matsui Akira',
                 createdAvatar:
                   'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
@@ -108,7 +97,7 @@ mocky
                 createdAt: '2019-05-09',
                 asignedAvatar:
                   'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-                assignee: ['Noma Yuma', 'Mtsui Akira'],
+                assignee: ['Noma Yuma', 'Matsui Akira'],
                 createrName: 'Noma Yuma',
                 createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
                 title: 'TB scheduling'

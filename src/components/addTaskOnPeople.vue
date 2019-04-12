@@ -22,13 +22,13 @@
           required
         ></v-text-field>
         </v-form>
-        <v-combobox
+        <v-autocomplete
           :error-messages="assignErrors"
           @input="$v.chips.$touch()"
           @blur="$v.chips.$touch()"
           required
           v-model="chips"
-          :items="items"
+          :items="users"
           label="Assign to"
           chips
           color="teal lighten-3"
@@ -41,7 +41,7 @@
               >&nbsp;
             </v-chip>
           </template>
-        </v-combobox>
+        </v-autocomplete>
         <v-layout row wrap>
           <v-flex xs5 sm5 md5>
             <v-menu
@@ -141,7 +141,7 @@ export default {
     return {
       form: Object.assign({}, defaultForm),
       chips: '',
-      items: ['Noma Yuma', 'Mtsui Akira'],
+      users: [],
       rules: {
         name: [val => (val || '').length > 0 || 'This field is required']
       },
@@ -155,6 +155,7 @@ export default {
   },
   props: {
     taskArray: Array,
+    usersArray: Array,
   },
   computed: {
     titleErrors () {
@@ -171,6 +172,9 @@ export default {
       },
   },
   methods: {
+    synUsers () {
+      this.users = this.usersArray
+    },
     remove(item) {
       this.chips.splice(this.chips.indexOf(item), 1)
       this.chips = [...this.chips]
@@ -186,7 +190,6 @@ export default {
     addTask(){
       this.$v.$touch()
       if (this.$v.$invalid) {
-
       } else {
       const title = this.title
       const assignee = this.chips
@@ -223,6 +226,8 @@ export default {
       this.startDate = new Date().toISOString().substr(0, 10)
       this.endDate = new Date().toISOString().substr(0, 10)
       }}
-    }
+    },
+    mounted () {
+    },
   }
 </script>

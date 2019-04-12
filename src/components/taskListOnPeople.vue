@@ -2,7 +2,7 @@
   <v-layout>
     <v-flex xs12>
       <v-card>
-        <addTaskOnPeople v-bind:task-array="tasks" @add-list="getList"/>
+        <addTaskOnPeople ref="addTask" v-bind:task-array="tasks" v-bind:users-array="users" @add-list="getList"/>
         <!--TaskMain-->
         <v-subheader class="subHeader">
           <span>All oepn tasks</span>
@@ -167,10 +167,10 @@
                         </v-flex>
                       </v-layout>
                     </section>
-                    <v-combobox
+                    <v-autocomplete
                       v-model="item.assignee"
                       prepend-icon="people"
-                      :items="items"
+                      :items="users"
                       label="Assigned to"
                       chips
                       :rules="rules.name"
@@ -182,13 +182,13 @@
                         <v-chip
                           :selected="data.selected"
                           close
-                          @input="remove(data.item)"
+                          class="chip--select-multi"
+                          @input="remove(data.item, item.id)"
                         >
-                          <strong>{{ data.item }}</strong
-                          >&nbsp;
+                        {{ data.item }}
                         </v-chip>
                       </template>
-                    </v-combobox>
+                    </v-autocomplete>
                     <v-text-field
                       class="shareUrl detailLeftItems"
                       value="http://...."
@@ -381,8 +381,8 @@ export default {
     menu4: false,
     sort: [{ title: 'Newest' }, { title: 'Due' }],
     sortKey: '',
-    chips: ['Mtsui Akira'],
-    items: ['Noma Yuma', 'Mtsui Akira'],
+    chips: '',
+    users: [],
     rules: {
       name: [val => (val || '').length > 0 || '']
     },
@@ -423,9 +423,11 @@ export default {
     }
   },
   methods: {
-    remove(item) {
-      this.chips.splice(this.chips.indexOf(item), 1)
-      this.chips = [...this.chips]
+    remove(item, id) {
+      const idArray = this.tasks.map(elm => elm.id)
+      const removeIndex = idArray.indexOf(id)
+      this.tasks[removeIndex].assignee.splice(this.tasks[removeIndex].assignee.indexOf(item), 1)
+      this.tasks[removeIndex].assignee = [...this.tasks[removeIndex].assignee]
     },
     taskDoneToggle(id) {
       this.tasks[id].done = !this.tasks[id].done
@@ -479,8 +481,16 @@ export default {
           console.log(error), this.progresserror = true
         )
       )
-      .then(() => (this.progress = false))
-
+      .then(() => (this.progress = false)),
+    axios
+    .get('http://127.0.0.1:4321/users')
+    .then(response => (this.users = response.data))
+    .catch(
+        error => (
+          console.log(error)
+        )
+      )
+    .then(() => (this.$refs.addTask.synUsers()))
   }
 }
 </script>
