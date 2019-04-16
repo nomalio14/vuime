@@ -56,11 +56,7 @@
             <v-btn flat icon color="grey darken-2">
               <v-icon>notifications</v-icon>
             </v-btn>
-            <a>
-              <v-avatar class="headerAvatar">
-                <img src="https://cdn.vuetifyjs.com/images/john.jpg" />
-              </v-avatar>
-            </a>
+            <userSetting />
           </div>
         </div>
       </nav>
@@ -88,15 +84,18 @@
 
 <script>
 import sideMenu from './components/sideMenu.vue'
+import userSetting from './components/userSetting.vue'
 export default {
   name: 'app',
   components: {
-    sideMenu
+    sideMenu,
+    userSetting
   },
   data() {
     return {
       isActive: true,
-      on: false
+      on: false,
+      dialog: false
     }
   },
   methods: {
@@ -188,10 +187,7 @@ a.navbar-burger.burger {
   transform: translateX(-105%);
   opacity: 0;
 }
-.headAvatar {
-  max-height: 100% !important;
-  margin-left: 10px;
-}
+
 .navbar-item img {
   max-height: 100%;
 }
@@ -201,9 +197,6 @@ a.navbar-burger.burger {
 }
 .pSearchForm {
   height: 80px;
-}
-.headerAvatar {
-  margin-left: 20px;
 }
 body {
   padding-top: 45px;

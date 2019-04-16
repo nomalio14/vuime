@@ -430,6 +430,7 @@ export default {
     }
   },
   methods: {
+    //タイトル入力フォームサイズ可変長
     titleInput(e) {
       const targetEl = document.getElementById('edit-id' + e)
       this.editStyle = `width: ${targetEl.clientWidth + 50}px;!important`

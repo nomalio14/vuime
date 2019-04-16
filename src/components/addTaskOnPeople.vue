@@ -229,5 +229,10 @@ export default {
     },
     mounted () {
     },
+    watch: {
+    dialog (val) {
+      !val && this.createCancel()
+    }
+    }
   }
 </script>
