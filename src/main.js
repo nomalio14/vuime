@@ -7,6 +7,7 @@ import App from './App.vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import Vuex from 'vuex';
+import axios from 'axios'
 Vue.use(Vuex);
 Vue.use(Vuetify, {
   iconfont: 'mdi' // 'md' || 'mdi' || 'fa' || 'fa4'
@@ -16,16 +17,31 @@ Vue.config.productionTip = false
 
 const store = new Vuex.Store({
   state: {
-    userData: {
-      name: 'Noma Yuma',
-      email: 'nomalio@gmail.com',
-      avatar: 'https://cdn.vuetifyjs.com/images/john.jpg'
-  }
+    userData: []
   },
+  actions: {
+    loadUserdata ({ commit }) {
+      axios
+        .get('http://127.0.0.1:4321/userdata')
+        .then(response => {
+        const userData = response.data
+        commit('setUserData', userData)
+        })
+        .catch(
+          error => (
+            console.log(error)
+          )
+        )
+    }
+  },
+
   mutations: {
     updateUserData(state, newUserInfo) {
       state.userData = newUserInfo;
     },
+    setUserData(state, userData) {
+      state.userData = userData
+    }
   },
 });
 

@@ -3,7 +3,7 @@
     <v-dialog v-model="dialog" max-width="600px" lazy persistent>
       <template v-slot:activator="{ on }">
         <a v-on="on" @click="loadSetting">
-              <v-avatar class="headerAvatar">
+              <v-avatar class="headAvatar">
                 <img :src="userInfo.avatar">
               </v-avatar>
             </a>
@@ -148,6 +148,9 @@ import { mapState } from 'vuex';
       panel: []
     }
     },
+    mounted () {
+    this.$store.dispatch('loadUserdata')
+  },
     computed: {
         ...mapState({
         userInfo: state => state.userData,
@@ -211,7 +214,7 @@ import { mapState } from 'vuex';
   }
 </script>
 <style>
-.headerAvatar {
+.headAvatar {
   margin-left: 20px!important;
 }
 .displayedName {
@@ -229,6 +232,14 @@ import { mapState } from 'vuex';
 }
 .accountSettingContainer {
     padding: 0px 24px!important
+}
+@media screen and (max-width: 1090px) {
+  .headAvatar {
+  margin-right: 5px!important;
+  margin-left: 15px!important;
+  height: 35px!important;
+  width: 35px!important;
+}
 }
 
 </style>

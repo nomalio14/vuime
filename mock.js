@@ -20,6 +20,65 @@ mocky
     },
     {
       // simple GET route without request body to match
+      url: '/findpeople',
+      method: 'get',
+      headers: { 'Content-type': 'text/json' },
+      res: {
+        status: 200,
+        headers: {
+          'Content-type': 'text/html',
+          'Access-Control-Allow-Origin': 'http://localhost:8080'
+        },
+        body: JSON.stringify({
+            name:'Matsui Akira',
+            avatar:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+            email:'matsui.akira@gmail.com'
+        })
+      }
+    },
+    {
+      // simple GET route without request body to match
+      url: '/findpeople_wait',
+      method: 'get',
+      headers: { 'Content-type': 'text/json' },
+      res: function(req, res, callback) {
+        setTimeout(function() {
+          callback(null, {
+            status: 200,
+            headers: {
+              'Content-type': 'text/html',
+              'Access-Control-Allow-Origin': 'http://localhost:8080'
+            },
+            body: JSON.stringify({
+              name:'Matsui Akira',
+              avatar:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+              email:'matsui.akira@gmail.com'
+          })
+          })
+        }, 1000)
+      }
+    },
+    {
+      // simple GET route without request body to match
+      url: '/userdata',
+      method: 'get',
+      headers: { 'Content-type': 'text/json' },
+      res: {
+        status: 200,
+        headers: {
+          'Content-type': 'text/html',
+          'Access-Control-Allow-Origin': 'http://localhost:8080'
+        },
+        body: JSON.stringify({
+          name: 'Noma Yuma',
+          email: 'nomalio@gmail.com',
+          avatar: 'https://cdn.vuetifyjs.com/images/john.jpg'
+          }
+        )
+      }
+    },
+    {
+      // simple GET route without request body to match
       url: '/taskList_wait',
       method: 'get',
       headers: { 'Content-type': 'text/json' },

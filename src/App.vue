@@ -36,23 +36,25 @@
           <a class="navbar-item is-hidden-touch vuimeLogo" href="/">
             <img src="./assets/vuiMeLogo.png" width="112" height="28" />
           </a>
-          <a class="navbar-item is-hidden-desktop" href="/" id="mobileLogo">
-            <img src="./assets/vuiMeLogo.png" width="112" height="28" />
-          </a>
+          <div class="navbar-item is-hidden-desktop" id="mobileLogo">
+            <addPeople />
+            <v-btn flat icon color="grey darken-2">
+              <v-icon>notifications</v-icon>
+            </v-btn>
+            <userSetting />
+          </div>
         </div>
         <div class="navbar-item column is-7-desktop pSearchForm" expanded>
           <v-text-field
             box
-            label="Create task with some command"
+            label="Create task with Vuime command"
             prepend-inner-icon="search"
             color="teal lighten-3"
           ></v-text-field>
         </div>
         <div class="navbar-item column is-3 is-hidden-touch">
           <div class="buttons is-hidden-touch" id="rightItemOfHeader">
-            <v-btn flat icon color="grey darken-2">
-              <v-icon medium>person_add</v-icon>
-            </v-btn>
+            <addPeople />
             <v-btn flat icon color="grey darken-2">
               <v-icon>notifications</v-icon>
             </v-btn>
@@ -85,11 +87,13 @@
 <script>
 import sideMenu from './components/sideMenu.vue'
 import userSetting from './components/userSetting.vue'
+import addPeople from './components/addPeople.vue'
 export default {
   name: 'app',
   components: {
     sideMenu,
-    userSetting
+    userSetting,
+    addPeople
   },
   data() {
     return {
@@ -173,6 +177,9 @@ a.navbar-burger.burger {
 
 #mobileLogo {
   float: right;
+  padding: 0!important;
+  max-height: 40px!important;
+  
 }
 
 .show-enter-active,
