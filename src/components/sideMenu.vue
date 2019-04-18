@@ -8,7 +8,7 @@
       <li><router-link to="/page2">My Gantt</router-link></li>
     </ul>
     <p class="menu-label">
-      Groups
+      Channel
       <v-btn class="sideAddButton" flat icon>
         <v-icon class="sideAddIcon">add_circle_outline</v-icon>
       </v-btn>
@@ -21,10 +21,8 @@
       <li><a>GroupE</a></li>
     </ul>
     <p class="menu-label">
-      Peoples
-      <v-btn class="sideAddButton" flat icon>
-        <v-icon class="sideAddIcon">add_circle_outline</v-icon>
-      </v-btn>
+      Direct
+      <startDirect />
     </p>
     <ul class="menu-list">
       <li><router-link to="/peoplePage">PeopleA</router-link></li>
@@ -37,6 +35,16 @@
     </ul>
   </aside>
 </template>
+
+<script>
+import startDirect from './startDirect.vue'
+
+export default {
+  components: {
+    startDirect
+  }
+}
+</script>
 
 <style>
 .is-sidebar-menu.is-hidden-touch {

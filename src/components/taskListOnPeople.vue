@@ -2,10 +2,15 @@
   <v-layout>
     <v-flex xs12>
       <v-card>
-        <addTaskOnPeople ref="addTask" v-bind:task-array="tasks" v-bind:users-array="users" @add-list="getList"/>
+        <addTaskOnPeople
+          ref="addTask"
+          v-bind:task-array="tasks"
+          v-bind:users-array="users"
+          @add-list="getList"
+        />
         <!--TaskMain-->
         <v-subheader class="subHeader">
-          <span>All oepn tasks</span>
+          <span>tasks list</span>
           <v-spacer></v-spacer>
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
@@ -15,7 +20,11 @@
             </template>
             <!--Sort freature-->
             <v-list>
-              <v-list-tile @click="changeSort(item, index)" v-for="(item, index) in sort" :key="index">
+              <v-list-tile
+                @click="changeSort(item, index)"
+                v-for="(item, index) in sort"
+                :key="index"
+              >
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
@@ -58,23 +67,40 @@
                   </v-list-tile-avatar>
                   <v-flex xs6 sm8>
                     <v-list-tile-content>
-                      <v-list-tile-title v-if="!item.isEdit">{{ item.title }}</v-list-tile-title>
-                      <v-text-field v-bind:style="editStyle" v-on="titleInput(item.id)" prepend-inner-icon="edit" :rules="rules.name" color="teal lighten-3" class="editTitle" single-line label="Task name" @click.stop="" v-if="item.isEdit" v-model="item.title"></v-text-field>
-                      <span ref="hidden" v-bind:id="'edit-id' + item.id" class="checkEditWidth">{{ item.title }}</span>
+                      <v-list-tile-title v-if="!item.isEdit">{{
+                        item.title
+                      }}</v-list-tile-title>
+                      <v-text-field
+                        v-bind:style="editStyle"
+                        v-on="titleInput(item.id)"
+                        prepend-inner-icon="edit"
+                        :rules="rules.name"
+                        color="teal lighten-3"
+                        class="editTitle"
+                        single-line
+                        label="Task name"
+                        @click.stop=""
+                        v-if="item.isEdit"
+                        v-model="item.title"
+                      ></v-text-field>
+                      <span
+                        ref="hidden"
+                        v-bind:id="'edit-id' + item.id"
+                        class="checkEditWidth"
+                        >{{ item.title }}</span
+                      >
                     </v-list-tile-content>
                   </v-flex>
                   <v-flex xs4 sm4>
                     <div class="dueBox">
-                      <span class="due">{{
-                        item.due | duedateFormat
-                      }}</span>
-                      </div>
-                      <div class="listRightItems">
+                      <span class="due">{{ item.due | duedateFormat }}</span>
+                    </div>
+                    <div class="listRightItems">
                       <v-avatar size="30px" class="listAvatar">
                         <img :src="item.asignedAvatar" />
                       </v-avatar>
-                      </div>
-                    </v-flex>
+                    </div>
+                  </v-flex>
                 </v-list-tile>
               </v-list>
             </template>
@@ -92,7 +118,9 @@
                       </v-list-tile-avatar>
                       <span class="detailHeadName">{{ item.createrName }}</span>
                       <span class="createdAvatar createdTimeAt">at</span>
-                      <span class="detailHeadName">{{ item.createdAt.toLocaleString() | duedateFormat }}</span>
+                      <span class="detailHeadName">{{
+                        item.createdAt.toLocaleString() | duedateFormat
+                      }}</span>
                     </v-subheader>
                   </v-card>
                 </v-flex>
@@ -186,7 +214,7 @@
                           class="chip--select-multi"
                           @input="remove(data.item, item.id)"
                         >
-                        {{ data.item }}
+                          {{ data.item }}
                         </v-chip>
                       </template>
                     </v-autocomplete>
@@ -202,7 +230,12 @@
                     <!--Button group-->
                     <v-layout row wrap>
                       <v-flex xs6 text-xs-center>
-                        <v-btn flat class="DetailButtons" @click="deleteTask(item.id)">Delete</v-btn>
+                        <v-btn
+                          flat
+                          class="DetailButtons"
+                          @click="deleteTask(item.id)"
+                          >Delete</v-btn
+                        >
                       </v-flex>
                       <v-flex xs6 text-xs-center>
                         <v-btn
@@ -256,16 +289,16 @@
 </template>
 
 <style>
-.checkEditWidth{
+.checkEditWidth {
   visibility: hidden;
   position: fixed;
   white-space: nowrap;
 }
-.v-list__tile--avatar{
-  height: 45px!important;
+.v-list__tile--avatar {
+  height: 45px !important;
 }
 .editTitle {
-  min-width: 120px!important;
+  min-width: 120px !important;
 }
 .errorAlert {
   margin: 0 !important;
@@ -346,11 +379,11 @@
 }
 .due {
   text-align: center !important;
-  font-size: 13px!important;
-  color: #424242!important;
-  width: 30%!important;
+  font-size: 13px !important;
+  color: #424242 !important;
+  width: 30% !important;
 }
-.dueBox{ 
+.dueBox {
   float: right !important;
   width: 56px;
 }
@@ -365,15 +398,15 @@ hr {
     max-width: 100% !important;
   }
   .editTitle {
-  max-width: 100%!important;
-}
+    max-width: 100% !important;
+  }
 }
 </style>
 <script>
 import addTaskOnPeople from './addTaskOnPeople.vue'
 import moment from 'moment'
 import axios from 'axios'
-import { setTimeout } from 'timers';
+import { setTimeout } from 'timers'
 export default {
   components: {
     addTaskOnPeople
@@ -395,14 +428,14 @@ export default {
     },
     tasks: [],
     progress: true,
-    progresserror: false,
+    progresserror: false
   }),
   props: {
-    filterType: String,
+    filterType: String
   },
-  filters:{
-    duedateFormat: function (date) {
-            return moment(date).format('MMM Do');
+  filters: {
+    duedateFormat: function(date) {
+      return moment(date).format('MMM Do')
     }
   },
   computed: {
@@ -410,21 +443,21 @@ export default {
     // items: ['All open', 'To me', 'Due today', 'Completed', 'All']
     filteredTasks: function() {
       switch (this.filterType) {
-        case 'All open': 
-          return this.tasks.filter((task) => {
-            return task.done !== true 
-            },this);
-          break;
-        case 'Completed': 
-          return this.tasks.filter((task) => {
-            return task.done === true 
-            },this);
-          break;
-        case 'All': 
+        case 'All open':
+          return this.tasks.filter(task => {
+            return task.done !== true
+          }, this)
+          break
+        case 'Completed':
+          return this.tasks.filter(task => {
+            return task.done === true
+          }, this)
+          break
+        case 'All':
           return this.tasks
-          break;
+          break
         // Others
-        default: 
+        default:
           return this.tasks
       }
     }
@@ -438,7 +471,10 @@ export default {
     remove(item, id) {
       const idArray = this.tasks.map(elm => elm.id)
       const removeIndex = idArray.indexOf(id)
-      this.tasks[removeIndex].assignee.splice(this.tasks[removeIndex].assignee.indexOf(item), 1)
+      this.tasks[removeIndex].assignee.splice(
+        this.tasks[removeIndex].assignee.indexOf(item),
+        1
+      )
       this.tasks[removeIndex].assignee = [...this.tasks[removeIndex].assignee]
     },
     taskDoneToggle(id) {
@@ -456,53 +492,45 @@ export default {
       this.panel = null
     },
     changeSort(item, index) {
-      console.log(index);
+      console.log(index)
     },
-    getList(newList){
+    getList(newList) {
       //console.log(newList)
       this.tasks.push(newList)
     },
     inputedStartDate(id) {
       const idArray = this.tasks.map(elm => elm.id)
       const inputedIndex = idArray.indexOf(id)
-      if (this.tasks[inputedIndex].startDate > this.tasks[inputedIndex].due){
-      this.tasks[inputedIndex].due　= this.tasks[inputedIndex].startDate
+      if (this.tasks[inputedIndex].startDate > this.tasks[inputedIndex].due) {
+        this.tasks[inputedIndex].due = this.tasks[inputedIndex].startDate
       }
-    },
+    }
   },
   watch: {
-  panel: function() {
-    const panelId = this.panel
-    if(panelId == null) {
-      this.tasks.forEach(elm => elm.isEdit = false)
-    }else{
-      this.tasks.forEach(elm => elm.isEdit = false)
-      const targetTaskId = this.filteredTasks[panelId].id
-      const idArray = this.tasks.map(elm => elm.id)
-      const editIndex = idArray.indexOf(targetTaskId)
-      this.tasks[editIndex].isEdit = true
-  }
-  }
+    panel: function() {
+      const panelId = this.panel
+      if (panelId == null) {
+        this.tasks.forEach(elm => (elm.isEdit = false))
+      } else {
+        this.tasks.forEach(elm => (elm.isEdit = false))
+        const targetTaskId = this.filteredTasks[panelId].id
+        const idArray = this.tasks.map(elm => elm.id)
+        const editIndex = idArray.indexOf(targetTaskId)
+        this.tasks[editIndex].isEdit = true
+      }
+    }
   },
   mounted() {
     axios
       .get('http://127.0.0.1:4321/taskList_wait')
-      .then(response => (this.tasks = response.data, this.progress = false))
-      .catch(
-        error => (
-          console.log(error), this.progresserror = true
-        )
-      )
+      .then(response => ((this.tasks = response.data), (this.progress = false)))
+      .catch(error => (console.log(error), (this.progresserror = true)))
       .then(() => (this.progress = false)),
-    axios
-    .get('http://127.0.0.1:4321/users')
-    .then(response => (this.users = response.data))
-    .catch(
-        error => (
-          console.log(error)
-        )
-      )
-    .then(() => (this.$refs.addTask.synUsers()))
+      axios
+        .get('http://127.0.0.1:4321/users')
+        .then(response => (this.users = response.data))
+        .catch(error => console.log(error))
+        .then(() => this.$refs.addTask.synUsers())
   }
 }
 </script>
