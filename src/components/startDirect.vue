@@ -1,28 +1,27 @@
 <template>
-    <v-dialog v-model="dialog" max-width="600px" lazy>
-      <template v-slot:activator="{ on }">
-        <v-btn v-on="on" class="sideAddButton" flat icon>
+  <v-dialog v-model="dialog" max-width="600px" lazy>
+    <template v-slot:activator="{ on }">
+      <v-btn v-on="on" class="sideAddButton" flat icon>
         <v-icon class="sideAddIcon">add_circle_outline</v-icon>
       </v-btn>
-      </template>
-      <allContact />
-    </v-dialog>
+    </template>
+    <allContact />
+  </v-dialog>
 </template>
 
 <script>
 import allContact from './allContact.vue'
 
 export default {
-    components: {
-        allContact
-    },
-    data() {
-        return {
-            dialog: false,
-        }
+  components: {
+    allContact
+  },
+  data() {
+    return {
+      dialog: false
     }
+  }
 }
-
 </script>
 
 <style>
