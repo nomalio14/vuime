@@ -17,7 +17,8 @@ Vue.config.productionTip = false
 
 const store = new Vuex.Store({
   state: {
-    userData: []
+    userData: [],
+    approveRequest: []
   },
   actions: {
     loadUserdata ({ commit }) {
@@ -32,7 +33,20 @@ const store = new Vuex.Store({
             console.log(error)
           )
         )
-    }
+    },
+    loadApproveRequest ({ commit }) {
+      axios
+        .get('http://127.0.0.1:4321/approveRequest')
+        .then(response => {
+        const approveRequest = response.data
+        commit('setApproveRequest', approveRequest)
+        })
+        .catch(
+          error => (
+            console.log(error)
+          )
+        )
+    },
   },
 
   mutations: {
@@ -41,6 +55,12 @@ const store = new Vuex.Store({
     },
     setUserData(state, userData) {
       state.userData = userData
+    },
+    updateApproveRequest(state, approveRequest) {
+      state.approveRequest = approveRequest;
+    },
+    setApproveRequest(state, approveRequest) {
+      state.approveRequest = approveRequest
     }
   },
 });

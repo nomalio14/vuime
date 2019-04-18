@@ -12,22 +12,16 @@
       dark
       >
       <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
-    <v-tab ripple :key="0">
+    <v-tab class="tabGroup" ripple :key="0">
         Add contact
     </v-tab>
-    <v-tab ripple :key="1">
+    <v-tab class="tabGroup" ripple :key="1">
         Approve
-    </v-tab>
-    <v-tab ripple :key="2">
-        All contacts
     </v-tab>
     <v-tab-item
       :key="0"
       >
       <v-card class="contents">
-        <v-card-title>
-          <span class="headline">Add contact</span>
-        </v-card-title>
         <v-card-text>
             <v-container>
                 <v-layout wrap>
@@ -86,10 +80,6 @@
       :key="1">
       <approveRequest/>
     </v-tab-item>
-    <v-tab-item
-      :key="2">
-      <allContact/>
-    </v-tab-item>
     </v-tabs>
       </div>
       </template>
@@ -109,12 +99,10 @@
 <script>
 import axios from 'axios'
 import approveRequest from './approveRequest.vue'
-import allContact from './allContact.vue'
 
 export default {
     components: {
     approveRequest,
-    allContact
   },
     data() {
       return {
@@ -176,8 +164,7 @@ export default {
 .contents {
     min-height: 490px!important;
 }
-.progress {
-}
-.foundSection {
+.tabGroup {
+  text-transform: none !important;
 }
 </style>

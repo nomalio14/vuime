@@ -1,38 +1,82 @@
 <template>
-<v-card>
+<v-card class="contents">
         <v-card-title>
-          <span class="headline">Approve request</span>
+          <span class="headline">Request list</span>
         </v-card-title>
-        <v-card-text>
-            <v-container>
-                <v-layout wrap>
-                    <v-flex xs12>
-                        <v-text-field
-                        label="User mail Address"
-                        color="teal lighten-3"
-                        class="search"
-                        single-line
-                        outline
-                        type="search"
-                        ></v-text-field>
-                    </v-flex>
-                    <v-flex xs12>
-                    <section>
-                    <v-flex xs12>
-                      <v-avatar size="100" class="detailAvatar">
-                        <img src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460">
-                      </v-avatar>
-                    </v-flex>
-                    <v-flex xs12>
-                      <div class="headline peopleName">Matsui Akira</div>
-                    </v-flex>
-                    <v-flex xs12>
-                    <v-btn class="applyButton" depressed color="teal lighten-3" dark @click="">Apply</v-btn>
-                    </v-flex>
-                    </section>
-                    </v-flex>
-                </v-layout>
-            </v-container>
-        </v-card-text>
+        <v-list>
+          <template v-for="(item, index) in approveRequest">
+          <v-list-tile
+            :key="item.id"
+            avatar
+          >
+            <v-list-tile-avatar>
+              <img :src="item.avatar">
+            </v-list-tile-avatar>
+            <v-flex xs4 sm7>
+            <v-list-tile-content>
+              <v-list-tile-title v-html="item.name"></v-list-tile-title>
+            </v-list-tile-content>
+            </v-flex>
+            <v-spacer></v-spacer>
+            <v-list-tile-action>
+              <v-btn class="buttons" @click="confirmRequest(item.userId)" depressed dark small color="teal lighten-3">Confirm</v-btn>
+            </v-list-tile-action>
+            <v-list-tile-action>
+              <v-btn class="buttons" @click="removeRequest(item.userId)" depressed small>Delete</v-btn>
+            </v-list-tile-action>
+          </v-list-tile>
+          <v-divider
+          v-if="index < approveRequest.length"
+          :key="index"
+          ></v-divider>
+          </template>
+        </v-list>
       </v-card>
     </template>
+
+<script>
+import { mapState } from 'vuex';
+
+  export default {
+    data () {
+      return {
+
+      }
+    },
+    methods: {
+        removeRequest(id) {
+            const idArray = this.approveRequest.map(elm => elm.userId)
+            const deleteIndex = idArray.indexOf(id)
+            this.approveRequest.splice(deleteIndex, 1)
+            this.$store.commit('updateApproveRequest', this.approveRequest);
+        },
+        confirmRequest(id) {
+            const idArray = this.approveRequest.map(elm => elm.userId)
+            const deleteIndex = idArray.indexOf(id)
+            this.approveRequest.splice(deleteIndex, 1)
+            this.$store.commit('updateApproveRequest', this.approveRequest);
+        },
+
+    },
+    mounted () {
+    this.$store.dispatch('loadApproveRequest')
+    },
+    computed: {
+    ...mapState({
+    approveRequest: state => state.approveRequest,
+    }),
+    }
+  }
+</script>
+
+<style>
+.contents {
+    min-height: 490px!important;
+    max-height: 490px!important;
+}
+
+.buttons {
+    text-transform: none !important;
+}
+
+</style>

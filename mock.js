@@ -20,24 +20,6 @@ mocky
     },
     {
       // simple GET route without request body to match
-      url: '/findpeople',
-      method: 'get',
-      headers: { 'Content-type': 'text/json' },
-      res: {
-        status: 200,
-        headers: {
-          'Content-type': 'text/html',
-          'Access-Control-Allow-Origin': 'http://localhost:8080'
-        },
-        body: JSON.stringify({
-            name:'Matsui Akira',
-            avatar:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-            email:'matsui.akira@gmail.com'
-        })
-      }
-    },
-    {
-      // simple GET route without request body to match
       url: '/findpeople_wait',
       method: 'get',
       headers: { 'Content-type': 'text/json' },
@@ -54,6 +36,45 @@ mocky
               avatar:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
               email:'matsui.akira@gmail.com'
           })
+          })
+        }, 1000)
+      }
+    },
+    {
+      // simple GET route without request body to match
+      url: '/approveRequest',
+      method: 'get',
+      headers: { 'Content-type': 'text/json' },
+      res: function(req, res, callback) {
+        setTimeout(function() {
+          callback(null, {
+            status: 200,
+            headers: {
+              'Content-type': 'text/html',
+              'Access-Control-Allow-Origin': 'http://localhost:8080'
+            },
+            body: JSON.stringify([
+              { 
+                userId: 1,
+                name: 'Binhaaaaaaaaaaaaaaaaaaaaaaaa',
+                avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg'
+                },
+              { 
+                userId: 2,
+                name: 'Ranee Carlson',
+                avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg'
+                },
+              { 
+                userId: 3,
+                name: 'Jason Oner',
+                avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg'
+                },
+              { 
+                userId: 4,
+                name: 'Ranee',
+                avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg'
+                },
+            ])
           })
         }, 1000)
       }
