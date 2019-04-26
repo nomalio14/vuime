@@ -25,15 +25,19 @@
       </v-subheader>
         <v-expansion-panel popout>
     <v-expansion-panel-content
-      v-for="(item) in tasks"
+      v-for="(item,index) in tasks"
       :key="item.title"
     >
       <template v-slot:header>
-        <v-list two-line subheader>
+        <v-list
+        two-line
+        subheader
+        >
           <v-list-tile
               ripple
               avatar
-              @click=""
+              v-bind:id="['scrollId-' + index]"
+              @click="getId"
               >
           <v-list-tile-avatar>
             <v-btn icon @click.native.stop="">
@@ -227,7 +231,7 @@
     width: 100%;
     padding:0 16px;
     position: absolute!important;
-	  bottom: 0!important;
+    bottom: 0!important;
   }
   .DetailButtons{
     text-transform: none!important;
@@ -372,7 +376,10 @@ export default {
         
     }),
     methods: {
-      remove (item) {
+      getId: function (event) {
+        console.log(event.target.id)
+        },
+      remove: function (item) {
         this.chips.splice(this.chips.indexOf(item), 1)
         this.chips = [...this.chips]
       }
