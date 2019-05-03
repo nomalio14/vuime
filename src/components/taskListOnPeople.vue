@@ -261,23 +261,7 @@
                   </v-card>
                 </v-flex>
                 <v-flex d-flex xs12 sm9 md9>
-                  <v-card class="note">
-                    <v-subheader>
-                      <v-icon>speaker_notes </v-icon>
-                      <!--Note-->
-                      <span>Note</span>
-                    </v-subheader>
-                    <div class="noteContents"></div>
-                    <b-field class="commentInput">
-                      <b-input placeholder="Comment..." type="text" expanded>
-                      </b-input>
-                      <p class="control">
-                        <button class="button sendButton is-success">
-                          Send
-                        </button>
-                      </p>
-                    </b-field>
-                  </v-card>
+                  <Note />
                 </v-flex>
               </v-layout>
             </v-container>
@@ -404,12 +388,14 @@ hr {
 </style>
 <script>
 import addTaskOnPeople from './addTaskOnPeople.vue'
+import Note from './Note.vue'
 import moment from 'moment'
 import axios from 'axios'
 import { setTimeout } from 'timers'
 export default {
   components: {
-    addTaskOnPeople
+    addTaskOnPeople,
+    Note
   },
   data: () => ({
     isEdit: false,

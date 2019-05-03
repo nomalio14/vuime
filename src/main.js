@@ -6,9 +6,9 @@ Vue.use(Buefy)
 import App from './App.vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
-import Vuex from 'vuex';
+import Vuex from 'vuex'
 import axios from 'axios'
-Vue.use(Vuex);
+Vue.use(Vuex)
 Vue.use(Vuetify, {
   iconfont: 'mdi' // 'md' || 'mdi' || 'fa' || 'fa4'
 })
@@ -21,49 +21,41 @@ const store = new Vuex.Store({
     approveRequest: []
   },
   actions: {
-    loadUserdata ({ commit }) {
+    loadUserdata({ commit }) {
       axios
         .get('http://127.0.0.1:4321/userdata')
         .then(response => {
-        const userData = response.data
-        commit('setUserData', userData)
+          const userData = response.data
+          commit('setUserData', userData)
         })
-        .catch(
-          error => (
-            console.log(error)
-          )
-        )
+        .catch(error => console.log(error))
     },
-    loadApproveRequest ({ commit }) {
+    loadApproveRequest({ commit }) {
       axios
         .get('http://127.0.0.1:4321/approveRequest')
         .then(response => {
-        const approveRequest = response.data
-        commit('setApproveRequest', approveRequest)
+          const approveRequest = response.data
+          commit('setApproveRequest', approveRequest)
         })
-        .catch(
-          error => (
-            console.log(error)
-          )
-        )
-    },
+        .catch(error => console.log(error))
+    }
   },
 
   mutations: {
     updateUserData(state, newUserInfo) {
-      state.userData = newUserInfo;
+      state.userData = newUserInfo
     },
     setUserData(state, userData) {
       state.userData = userData
     },
     updateApproveRequest(state, approveRequest) {
-      state.approveRequest = approveRequest;
+      state.approveRequest = approveRequest
     },
     setApproveRequest(state, approveRequest) {
       state.approveRequest = approveRequest
     }
-  },
-});
+  }
+})
 
 new Vue({
   router,

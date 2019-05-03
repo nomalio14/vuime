@@ -9,7 +9,9 @@
     </ul>
     <p class="menu-label">
       Channel
-      <startChannel />
+      <v-btn class="sideAddButton" flat icon>
+        <v-icon class="sideAddIcon">add_circle_outline</v-icon>
+      </v-btn>
     </p>
     <ul class="menu-list">
       <li><router-link to="/page3">GroupA</router-link></li>
@@ -36,12 +38,10 @@
 
 <script>
 import startDirect from './startDirect.vue'
-import startChannel from './startChannel.vue'
 
 export default {
   components: {
-    startDirect,
-    startChannel
+    startDirect
   }
 }
 </script>

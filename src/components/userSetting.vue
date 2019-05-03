@@ -101,7 +101,6 @@
                   </v-container>
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn flat color="error" @click="logout()">Logout</v-btn>
                   <v-spacer></v-spacer>
                   <v-btn flat @click="cancel()">Cancel</v-btn>
                   <v-btn depressed color="teal lighten-3" dark @click="save()"
@@ -198,7 +197,6 @@ export default {
         console.table(this.newUserInfo)
         this.$store.commit('updateUserData', this.newUserInfo)
         this.dialog = false
-        this.password = ''
       }
     },
     cancel() {
@@ -211,7 +209,6 @@ export default {
       this.confirmPassword = ''
       this.password = ''
     },
-    logout() {},
     loadSetting() {
       console.log(this.userInfo.name)
       this.newUserInfo = this.userInfo
@@ -225,7 +222,7 @@ export default {
 </script>
 <style>
 .headAvatar {
-  margin-left: 10px !important;
+  margin-left: 20px !important;
 }
 .displayedName {
   padding-top: 30px !important;

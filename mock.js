@@ -13,9 +13,7 @@ mocky
           'Content-type': 'text/html',
           'Access-Control-Allow-Origin': 'http://localhost:8080'
         },
-        body: JSON.stringify(
-          ['Noma Yuma', 'Matsui Akira']
-          )
+        body: JSON.stringify(['Noma Yuma', 'Matsui Akira'])
       }
     },
     {
@@ -32,10 +30,11 @@ mocky
               'Access-Control-Allow-Origin': 'http://localhost:8080'
             },
             body: JSON.stringify({
-              name:'Matsui Akira',
-              avatar:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-              email:'matsui.akira@gmail.com'
-          })
+              name: 'Matsui Akira',
+              avatar:
+                'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+              email: 'matsui.akira@gmail.com'
+            })
           })
         }, 1000)
       }
@@ -54,26 +53,26 @@ mocky
               'Access-Control-Allow-Origin': 'http://localhost:8080'
             },
             body: JSON.stringify([
-              { 
+              {
                 userId: 1,
                 name: 'Binhaaaaaaaaaaaaaaaaaaaaaaaa',
                 avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg'
-                },
-              { 
+              },
+              {
                 userId: 2,
                 name: 'Ranee Carlson',
                 avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg'
-                },
-              { 
+              },
+              {
                 userId: 3,
                 name: 'Jason Oner',
                 avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg'
-                },
-              { 
+              },
+              {
                 userId: 4,
                 name: 'Ranee',
                 avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg'
-                },
+              }
             ])
           })
         }, 1000)
@@ -94,8 +93,7 @@ mocky
           name: 'Noma Yuma',
           email: 'nomalio@gmail.com',
           avatar: 'https://cdn.vuetifyjs.com/images/john.jpg'
-          }
-        )
+        })
       }
     },
     {
@@ -124,7 +122,7 @@ mocky
                 assignee: ['Matsui Akira'],
                 createrName: 'Noma Yuma',
                 createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
-                title: 'Build people page',
+                title: 'Build people page'
               },
               {
                 id: 1,
@@ -138,7 +136,7 @@ mocky
                   'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
                 assignee: ['Matsui Akira'],
                 createrName: 'Noma Yuma',
-                createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
+                createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg'
               },
               {
                 id: 2,
@@ -166,7 +164,7 @@ mocky
                 assignee: ['Matsui Akira'],
                 createrName: 'Matsui Akira',
                 createdAvatar:
-                  'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+                  'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'
               },
               {
                 id: 4,
