@@ -127,7 +127,8 @@ import {
   sameAs
 } from 'vuelidate/lib/validators'
 import { mapState } from 'vuex'
-
+import { Auth } from 'aws-amplify'
+import { AmplifyEventBus } from 'aws-amplify-vue'
 export default {
   mixins: [validationMixin],
   validations: {
@@ -157,7 +158,7 @@ export default {
   },
   computed: {
     ...mapState({
-      userInfo: state => state.userData
+      userInfo: state => state.app.userData
     }),
     nameErrors() {
       const errors = []
@@ -211,7 +212,13 @@ export default {
       this.confirmPassword = ''
       this.password = ''
     },
-    logout() {},
+    logout() {
+      Auth.signOut()
+       .then(() => {
+         this.dialog = false
+         return AmplifyEventBus.$emit('authState', 'signedOut')
+       })
+    },
     loadSetting() {
       console.log(this.userInfo.name)
       this.newUserInfo = this.userInfo
