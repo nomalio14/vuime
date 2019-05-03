@@ -18,15 +18,17 @@
             </v-btn>
           </template>
           <v-list>
-              <v-list-tile
-                @click="clickChannelItem(item, index)"
-                v-for="(item, index) in channelItem"
-                :key="index"
-              >
-                <v-list-tile-title class="caption">{{ item.title }}</v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-          </v-menu>
+            <v-list-tile
+              @click="clickChannelItem(item, index)"
+              v-for="(item, index) in channelItem"
+              :key="index"
+            >
+              <v-list-tile-title class="caption">{{
+                item.title
+              }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
       </div>
     </v-toolbar>
     <div>
@@ -59,27 +61,19 @@
         <taskListOnPeople v-bind:filter-type="filter" />
       </v-container>
     </div>
-    <v-dialog
-      v-model="dialog"
-      max-width="290"
-    >
+    <v-dialog v-model="dialog" max-width="290">
       <v-card>
-        <v-card-title class="headline">Are you sure you want to delete this channel?</v-card-title>
+        <v-card-title class="headline"
+          >Are you sure you want to delete this channel?</v-card-title
+        >
         <v-card-actions>
           <v-spacer></v-spacer>
 
-          <v-btn
-            flat="flat"
-            @click="dialog = false"
-          >
+          <v-btn flat="flat" @click="dialog = false">
             Cancel
           </v-btn>
 
-          <v-btn
-            depressed
-            color="error"
-            @click="dialog = false"
-          >
+          <v-btn depressed color="error" @click="dialog = false">
             Delete
           </v-btn>
         </v-card-actions>
@@ -168,11 +162,11 @@ export default {
       console.log(this.filter)
     },
     clickChannelItem(item, index) {
-      if(item.title = "Delete") {
-        console.log("Clicked Delete")
+      if ((item.title = 'Delete')) {
+        console.log('Clicked Delete')
         this.dialog = true
       }
-    },
+    }
   }
 }
 </script>

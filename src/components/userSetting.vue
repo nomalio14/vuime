@@ -211,8 +211,7 @@ export default {
       this.confirmPassword = ''
       this.password = ''
     },
-    logout() {
-    },
+    logout() {},
     loadSetting() {
       console.log(this.userInfo.name)
       this.newUserInfo = this.userInfo

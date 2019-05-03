@@ -177,9 +177,8 @@ a.navbar-burger.burger {
 
 #mobileLogo {
   float: right;
-  padding: 0!important;
-  max-height: 40px!important;
-  
+  padding: 0 !important;
+  max-height: 40px !important;
 }
 
 .show-enter-active,
