@@ -36,6 +36,8 @@
           <a class="navbar-item is-hidden-touch vuimeLogo" href="/">
             <img src="./assets/vuiMeLogo.png" width="112" height="28" />
           </a>
+          <div v-if="!signedIn">
+          </div>
           <div class="navbar-item is-hidden-desktop" id="mobileLogo">
             <addPeople />
             <v-btn flat icon color="grey darken-2">
@@ -44,7 +46,7 @@
             <userSetting />
           </div>
         </div>
-        <div class="navbar-item column is-7-desktop pSearchForm" expanded>
+        <div class="navbar-item column is-7-desktop pSearchForm" expanded v-if="signedIn">
           <v-text-field
             box
             label="Create task with Vuime command"
@@ -52,7 +54,7 @@
             color="teal lighten-3"
           ></v-text-field>
         </div>
-        <div class="navbar-item column is-3 is-hidden-touch">
+        <div class="navbar-item column is-3 is-hidden-touch" v-if="signedIn">
           <div class="buttons is-hidden-touch" id="rightItemOfHeader">
             <addPeople />
             <v-btn flat icon color="grey darken-2">
@@ -63,6 +65,10 @@
         </div>
       </nav>
       <body>
+      <div class="authenticator" v-if="!signedIn">
+         <amplify-authenticator></amplify-authenticator>
+      </div>
+      <div v-if="signedIn">
         <div class="mainBody">
           <div class="columns is-fullheight" v-on:click="close">
             <div class="column is-2-desktop is-sidebar-menu is-hidden-touch">
@@ -79,24 +85,31 @@
             <router-view></router-view>
           </div>
         </div>
+        </div>
       </body>
     </div>
   </v-app>
 </template>
 
 <script>
+import { Auth } from 'aws-amplify'
+import { AmplifyEventBus } from 'aws-amplify-vue'
+import { components } from 'aws-amplify-vue'
 import sideMenu from './components/sideMenu.vue'
 import userSetting from './components/userSetting.vue'
 import addPeople from './components/addPeople.vue'
+import { mapState } from 'vuex'
 export default {
   name: 'app',
   components: {
     sideMenu,
     userSetting,
-    addPeople
+    addPeople,
+    ...components
   },
   data() {
     return {
+      // signedIn: false,
       isActive: true,
       on: false,
       dialog: false
@@ -109,10 +122,38 @@ export default {
     close: function() {
       this.on = false
     }
-  }
+  },
+  computed: {
+    ...mapState({
+      signedIn: state => state.auth.signedIn
+    }),
+  },
+  async beforeCreate() {
+    try {
+      const user = await Auth.currentAuthenticatedUser()
+      this.$store.commit('signIn')
+      // this.signedIn = true
+    } catch (err) {
+      this.$store.commit('signOut')
+      // this.signedIn = false
+    }
+    // AmplifyEventBusの使い方がよくわかってない。Vuexと同カラメル？
+    AmplifyEventBus.$on('authState', info => {
+      if (info === 'signedIn') {
+        this.$store.commit('signIn')
+        // this.signedIn = true
+      } else {
+        this.$store.commit('signOut')
+        // this.signedIn = false
+      }
+    });
+  },
 }
 </script>
 <style>
+.authenticator {
+  margin-top: 10vh;
+}
 .mainBody {
   width: 97% !important;
   object-fit: contain !important;
@@ -215,4 +256,3 @@ body {
   }
 }
 </style>
-<style lang="sass"></style>
