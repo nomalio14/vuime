@@ -8,6 +8,13 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import Vuex from 'vuex'
 import axios from 'axios'
+//Amplify
+import Amplify, * as AmplifyModules from 'aws-amplify'
+import { AmplifyPlugin } from 'aws-amplify-vue'
+import awsmobile from './aws-exports'
+Amplify.configure(awsmobile)
+Vue.use(AmplifyPlugin, AmplifyModules)
+
 Vue.use(Vuex)
 Vue.use(Vuetify, {
   iconfont: 'mdi' // 'md' || 'mdi' || 'fa' || 'fa4'
@@ -15,7 +22,21 @@ Vue.use(Vuetify, {
 
 Vue.config.productionTip = false
 
-const store = new Vuex.Store({
+const authModule = {
+  state: {
+    signedIn: false
+  },
+  mutations: {
+    signIn(state) {
+      state.signedIn = true
+    },
+    signOut(state) {
+      state.signedIn = false
+    }
+  }
+}
+
+const appModule = {
   state: {
     userData: [],
     approveRequest: []
@@ -54,6 +75,13 @@ const store = new Vuex.Store({
     setApproveRequest(state, approveRequest) {
       state.approveRequest = approveRequest
     }
+  }
+}
+
+const store = new Vuex.Store({
+  modules: {
+    auth: authModule,
+    app: appModule
   }
 })
 
