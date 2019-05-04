@@ -12,7 +12,7 @@
             </v-avatar>
             <span class="grey--text">{{ note.createdAt | dateFormat }}</span
             ><br />
-            <div v-html="compiledMarkdown(note.body)"></div>
+            <div class="withinNote" v-html="compiledMarkdown(note.body)"></div>
           </div>
         </v-card-title>
         <v-card-actions>
@@ -73,32 +73,32 @@ export default {
 }
 </script>
 
-<style scoped>
-h1 {
-  font-size: 24px;
-  font-weight: initial;
+<style>
+.withinNote > h1 {
+  font-size: 24px!important;
+  font-weight: initial!important;
 }
-h2 {
-  font-size: 18px;
-  font-weight: initial;
+.withinNote > h2 {
+  font-size: 18px!important;
+  font-weight: initial!important;
 }
-ul {
-  font-size: initial;
-  list-style-type: initial;
-  list-style-image: initial;
-  list-style-position: initial;
+.withinNote > ul {
+  font-size: initial!important;
+  list-style-type: initial!important;
+  list-style-image: initial!important;
+  list-style-position: initial!important;
 }
-table {
-  border-collapse: initial;
-  border-spacing: initial;
-  border-width: initial;
-  border-color: initial;
+.withinNote > table {
+  border-collapse: initial!important;
+  border-spacing: initial!important;
+  border-width: initial!important;
+  border-color: initial!important;
 }
-tr {
-  border-bottom: initial;
+.withinNote > tr {
+  border-bottom: initial!important;
 }
-td {
-  vertical-align: initial;
-  padding: initial;
+.withinNote > td {
+  vertical-align: initial!important;
+  padding: initial!important;
 }
 </style>
