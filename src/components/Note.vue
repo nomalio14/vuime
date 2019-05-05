@@ -1,34 +1,43 @@
 <template>
   <div>
+    <div class="notesSection" id="notesSection">
     <hr />
     <div v-for="note in notes">
-      <v-card flat>
-        <v-card-title>
+      <v-hover>
+      <v-card flat slot-scope="{ hover }"> 
           <div>
             <v-avatar size="30px" class="listAvatar">
               <img
-                src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+                :src="note.createdAvater"
               />
             </v-avatar>
             <span class="grey--text">{{ note.createdAt | dateFormat }}</span
             ><br />
             <div class="withinNote" v-html="compiledMarkdown(note.body)"></div>
           </div>
-        </v-card-title>
-        <v-card-actions>
-          <v-btn small flat>Edit</v-btn>
-          <v-btn small flat>Delete</v-btn>
+        <v-expand-transition>
+        <div class="actionButtons">
+        <v-card-actions v-if="hover">
+          <v-btn small flat icon color="grey darken-2"><v-icon small>edit</v-icon></v-btn>
+          <v-btn small flat icon color="grey darken-2"><v-icon small>delete</v-icon></v-btn>
         </v-card-actions>
+        </div>
+        </v-expand-transition>
       </v-card>
+      </v-hover>
       <hr />
+    </div>
     </div>
     <v-textarea
       name="input-7-1"
       label="Note"
       v-model="newNote"
       value=""
-      hint="Markdown available"
+      hint="Markdown available/ ⌘ + Enter to save"
+      color="teal lighten-3"
       background-color="grey lighten-3"
+      @keydown.meta.enter="saveNote"
+      @keydown.ctrl.enter="saveNote"
     ></v-textarea>
     <v-btn
       depressed
@@ -45,6 +54,8 @@
 <script>
 import moment from 'moment'
 import marked from 'marked'
+import { mapState } from 'vuex'
+
 export default {
   data: () => {
     return {
@@ -57,9 +68,11 @@ export default {
     saveNote() {
       this.notes.push({
         body: this.newNote,
-        createdAt: moment().format()
+        createdAt: moment().format(),
+        createdAvater: this.userInfo.avatar
       })
       this.newNote = ''
+      document.getElementById("notesSection").scrollTop = 0
     },
     compiledMarkdown(text) {
       return marked(text, { sanitize: true })
@@ -69,11 +82,26 @@ export default {
     dateFormat: function(date) {
       return moment(date).format('MMM Do HH:mm:ss')
     }
+  },
+  computed: {
+    ...mapState({
+      userInfo: state => state.app.userData
+    })
   }
 }
 </script>
 
 <style>
+.actionButtons {
+  height: 40px!important;
+}
+.notesSection {
+  max-height: 300px!important;
+  overflow: scroll !important;
+}
+.withinNote > p {
+  margin: 0!important;
+}
 .withinNote > h1 {
   font-size: 24px!important;
   font-weight: initial!important;

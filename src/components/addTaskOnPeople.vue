@@ -29,6 +29,9 @@
           required
           v-model="chips"
           :items="users"
+          return-object
+          item-text="name"
+          item-value="userid"
           label="Assign to"
           chips
           color="teal lighten-3"
@@ -37,7 +40,7 @@
         >
           <template v-slot:selection="data">
             <v-chip :selected="data.selected" close @input="remove(data.item)">
-              <strong>{{ data.item }}</strong
+              <strong>{{ data.item.name }}</strong
               >&nbsp;
             </v-chip>
           </template>
@@ -129,6 +132,7 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, email } from 'vuelidate/lib/validators'
+import { mapState } from 'vuex'
 
 export default {
   mixins: [validationMixin],
@@ -145,6 +149,7 @@ export default {
       form: Object.assign({}, defaultForm),
       chips: '',
       users: [],
+      chipsUsersIdIndex:[],
       rules: {
         name: [val => (val || '').length > 0 || 'This field is required']
       },
@@ -153,7 +158,7 @@ export default {
       endDate: new Date().toISOString().substr(0, 10),
       menu1: false,
       menu2: false,
-      title: ''
+      title: '',
     }
   },
   props: {
@@ -172,7 +177,10 @@ export default {
       if (!this.$v.chips.$dirty) return errors
       !this.$v.chips.required && errors.push('This field is required.')
       return errors
-    }
+    },
+    ...mapState({
+      userInfo: state => state.app.userData
+    }),
   },
   methods: {
     synUsers() {
@@ -198,6 +206,9 @@ export default {
         const assignee = this.chips
         const startDate = this.startDate
         const endDate = this.endDate
+        const chipsUserIdArray = this.chips.map(id => id.userId)
+        const chipsUserAvatarArray = this.chips.map(elm => elm.avatar)
+        const usersIdArray = this.users.map(elm => elm.userId)
         //新しいIDの生成
         const tasksLength = this.taskArray.length
         const endIndex = tasksLength - 1
@@ -214,14 +225,16 @@ export default {
           startDate: startDate,
           due: endDate,
           createdAt: UTCdate,
-          asignedAvatar:
-            'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+          asignedAvatar: chipsUserAvatarArray,
           assignee: assignee,
-          createrName: 'Noma Yuma',
-          createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
+          createrName: this.userInfo.name,
+          createdAvatar: this.userInfo.avatar,
           title: title
         }
         this.$emit('add-list', newList)
+        console.log(chipsUserIdArray)
+        console.log(usersIdArray)
+        console.log(chipsUserAvatarArray)
         this.dialog = false
         this.$refs.form.reset()
         this.$v.$reset()
@@ -236,6 +249,9 @@ export default {
     dialog(val) {
       !val && this.createCancel()
     }
+  },
+  filters: {
+
   }
 }
 </script>

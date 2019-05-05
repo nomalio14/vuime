@@ -13,9 +13,18 @@ mocky
           'Content-type': 'text/html',
           'Access-Control-Allow-Origin': 'http://localhost:8080'
         },
-        body: JSON.stringify(
-          ['Noma Yuma', 'Matsui Akira']
-          )
+        body: JSON.stringify([
+          {
+            userId:'nomalio14',
+            name:'Noma Yuma',
+            avatar:'https://cdn.vuetifyjs.com/images/john.jpg'
+          },
+          {
+            userId:'matsu14',
+            name:'Matsui Akira',
+            avatar:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'
+          }
+        ])
       }
     },
     {
@@ -120,7 +129,7 @@ mocky
                 startDate: '2019-10-01',
                 createdAt: '2019-04-09',
                 asignedAvatar:
-                  'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+                  ['https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'],
                 assignee: ['Matsui Akira'],
                 createrName: 'Noma Yuma',
                 createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
@@ -135,7 +144,7 @@ mocky
                 createdAt: '2019-05-09',
                 title: 'Solve select feature',
                 asignedAvatar:
-                  'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+                  ['https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'],
                 assignee: ['Matsui Akira'],
                 createrName: 'Noma Yuma',
                 createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
@@ -147,7 +156,7 @@ mocky
                 due: '2019-11-11',
                 startDate: '2019-10-14',
                 createdAt: '2019-10-09',
-                asignedAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
+                asignedAvatar: ['https://cdn.vuetifyjs.com/images/john.jpg'],
                 assignee: ['Matsui Akira'],
                 createrName: 'Matsui Akira',
                 createdAvatar:
@@ -162,7 +171,7 @@ mocky
                 startDate: '2019-12-01',
                 createdAt: '2019-05-11',
                 title: '【Primaly】Feedback of Interview',
-                asignedAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
+                asignedAvatar: ['https://cdn.vuetifyjs.com/images/john.jpg'],
                 assignee: ['Matsui Akira'],
                 createrName: 'Matsui Akira',
                 createdAvatar:
@@ -176,7 +185,7 @@ mocky
                 startDate: '2020-01-01',
                 createdAt: '2019-05-04',
                 asignedAvatar:
-                  'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+                  ['https://avatars0.githubusercontent.com/u/9064066?v=4&s=460','https://cdn.vuetifyjs.com/images/john.jpg'],
                 assignee: ['Noma Yuma', 'Matsui Akira'],
                 createrName: 'Noma Yuma',
                 createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',

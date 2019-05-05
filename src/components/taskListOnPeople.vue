@@ -96,9 +96,13 @@
                       <span class="due">{{ item.due | duedateFormat }}</span>
                     </div>
                     <div class="listRightItems">
+                      <span
+                        v-for="avatarImage in item.asignedAvatar"
+                        :key="avatarImage.index">
                       <v-avatar size="30px" class="listAvatar">
-                        <img :src="item.asignedAvatar" />
+                        <img :src="avatarImage" />
                       </v-avatar>
+                      </span>
                     </div>
                   </v-flex>
                 </v-list-tile>
@@ -200,6 +204,9 @@
                       v-model="item.assignee"
                       prepend-icon="people"
                       :items="users"
+                      item-text="name"
+                      item-value="userid"
+                      return-object
                       label="Assigned to"
                       chips
                       :rules="rules.name"
@@ -214,7 +221,7 @@
                           class="chip--select-multi"
                           @input="remove(data.item, item.id)"
                         >
-                          {{ data.item }}
+                          {{ data.item.name }}
                         </v-chip>
                       </template>
                     </v-autocomplete>
@@ -348,6 +355,7 @@
 }
 .listRightItems {
   float: right !important;
+  margin-right: 20px;
 }
 .v-list {
   padding: 0 !important;
@@ -372,7 +380,7 @@
   width: 56px;
 }
 .listAvatar {
-  margin-right: 10px;
+  margin-right: 3px;
 }
 hr {
   margin: 0 !important;
@@ -446,7 +454,7 @@ export default {
         default:
           return this.tasks
       }
-    }
+    },
   },
   methods: {
     //タイトル入力フォームサイズ可変長
@@ -481,7 +489,6 @@ export default {
       console.log(index)
     },
     getList(newList) {
-      //console.log(newList)
       this.tasks.push(newList)
     },
     inputedStartDate(id) {
