@@ -213,11 +213,10 @@ export default {
       this.password = ''
     },
     logout() {
-      Auth.signOut()
-       .then(() => {
-         this.dialog = false
-         return AmplifyEventBus.$emit('authState', 'signedOut')
-       })
+      Auth.signOut().then(() => {
+        this.dialog = false
+        return AmplifyEventBus.$emit('authState', 'signedOut')
+      })
     },
     loadSetting() {
       console.log(this.userInfo.name)

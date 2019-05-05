@@ -98,10 +98,11 @@
                     <div class="listRightItems">
                       <span
                         v-for="avatarImage in item.asignedAvatar"
-                        :key="avatarImage.index">
-                      <v-avatar size="30px" class="listAvatar">
-                        <img :src="avatarImage" />
-                      </v-avatar>
+                        :key="avatarImage.index"
+                      >
+                        <v-avatar size="30px" class="listAvatar">
+                          <img :src="avatarImage" />
+                        </v-avatar>
                       </span>
                     </div>
                   </v-flex>
@@ -454,7 +455,7 @@ export default {
         default:
           return this.tasks
       }
-    },
+    }
   },
   methods: {
     //タイトル入力フォームサイズ可変長

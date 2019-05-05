@@ -36,8 +36,7 @@
           <a class="navbar-item is-hidden-touch vuimeLogo" href="/">
             <img src="./assets/vuiMeLogo.png" width="112" height="28" />
           </a>
-          <div v-if="!signedIn">
-          </div>
+          <div v-if="!signedIn"></div>
           <div class="navbar-item is-hidden-desktop" id="mobileLogo">
             <addPeople />
             <v-btn flat icon color="grey darken-2">
@@ -46,7 +45,11 @@
             <userSetting />
           </div>
         </div>
-        <div class="navbar-item column is-7-desktop pSearchForm" expanded v-if="signedIn">
+        <div
+          class="navbar-item column is-7-desktop pSearchForm"
+          expanded
+          v-if="signedIn"
+        >
           <v-text-field
             box
             label="Create task with Vuime command"
@@ -65,26 +68,26 @@
         </div>
       </nav>
       <body>
-      <div class="authenticator" v-if="!signedIn">
-         <amplify-authenticator></amplify-authenticator>
-      </div>
-      <div v-if="signedIn">
-        <div class="mainBody">
-          <div class="columns is-fullheight" v-on:click="close">
-            <div class="column is-2-desktop is-sidebar-menu is-hidden-touch">
-              <sideMenu />
-            </div>
-            <transition name="show">
-              <div
-                class="column is-2-desktop is-sidebar-menu is-hidden-desktop"
-                v-if="on"
-              >
+        <div class="authenticator" v-if="!signedIn">
+          <amplify-authenticator></amplify-authenticator>
+        </div>
+        <div v-if="signedIn">
+          <div class="mainBody">
+            <div class="columns is-fullheight" v-on:click="close">
+              <div class="column is-2-desktop is-sidebar-menu is-hidden-touch">
                 <sideMenu />
               </div>
-            </transition>
-            <router-view></router-view>
+              <transition name="show">
+                <div
+                  class="column is-2-desktop is-sidebar-menu is-hidden-desktop"
+                  v-if="on"
+                >
+                  <sideMenu />
+                </div>
+              </transition>
+              <router-view></router-view>
+            </div>
           </div>
-        </div>
         </div>
       </body>
     </div>
@@ -126,7 +129,7 @@ export default {
   computed: {
     ...mapState({
       signedIn: state => state.auth.signedIn
-    }),
+    })
   },
   async beforeCreate() {
     try {
@@ -146,8 +149,8 @@ export default {
         this.$store.commit('signOut')
         // this.signedIn = false
       }
-    });
-  },
+    })
+  }
 }
 </script>
 <style>

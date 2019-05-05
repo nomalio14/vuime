@@ -149,7 +149,7 @@ export default {
       form: Object.assign({}, defaultForm),
       chips: '',
       users: [],
-      chipsUsersIdIndex:[],
+      chipsUsersIdIndex: [],
       rules: {
         name: [val => (val || '').length > 0 || 'This field is required']
       },
@@ -158,7 +158,7 @@ export default {
       endDate: new Date().toISOString().substr(0, 10),
       menu1: false,
       menu2: false,
-      title: '',
+      title: ''
     }
   },
   props: {
@@ -180,7 +180,7 @@ export default {
     },
     ...mapState({
       userInfo: state => state.app.userData
-    }),
+    })
   },
   methods: {
     synUsers() {
@@ -208,7 +208,6 @@ export default {
         const endDate = this.endDate
         const chipsUserIdArray = this.chips.map(id => id.userId)
         const chipsUserAvatarArray = this.chips.map(elm => elm.avatar)
-        const usersIdArray = this.users.map(elm => elm.userId)
         //新しいIDの生成
         const tasksLength = this.taskArray.length
         const endIndex = tasksLength - 1
@@ -233,7 +232,6 @@ export default {
         }
         this.$emit('add-list', newList)
         console.log(chipsUserIdArray)
-        console.log(usersIdArray)
         console.log(chipsUserAvatarArray)
         this.dialog = false
         this.$refs.form.reset()
@@ -250,8 +248,6 @@ export default {
       !val && this.createCancel()
     }
   },
-  filters: {
-
-  }
+  filters: {}
 }
 </script>
