@@ -97,11 +97,12 @@
                     </div>
                     <div class="listRightItems">
                       <span
-                        v-for="avatarImage in item.asignedAvatar"
-                        :key="avatarImage.index"
+                        v-for="assigneeId in item.assignee"
+                        :key="assigneeId.index"
                       >
                         <v-avatar size="30px" class="listAvatar">
-                          <img :src="avatarImage" />
+                          <img 
+                          :src="assigneeAvatar(assigneeId)" />
                         </v-avatar>
                       </span>
                     </div>
@@ -206,8 +207,7 @@
                       prepend-icon="people"
                       :items="users"
                       item-text="name"
-                      item-value="userid"
-                      return-object
+                      item-value="userId"
                       label="Assigned to"
                       chips
                       :rules="rules.name"
@@ -220,7 +220,7 @@
                           :selected="data.selected"
                           close
                           class="chip--select-multi"
-                          @input="remove(data.item, item.id)"
+                          @input="remove(data.item.userId, item.id)"
                         >
                           {{ data.item.name }}
                         </v-chip>
@@ -458,6 +458,12 @@ export default {
     }
   },
   methods: {
+    assigneeAvatar(id){
+      const targetUser = this.users.filter(function(item, index){
+        if (item.userId === id) return true;
+      })
+      return targetUser[0].avatar
+    },
     //タイトル入力フォームサイズ可変長
     titleInput(e) {
       const targetEl = document.getElementById('edit-id' + e)

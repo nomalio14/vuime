@@ -130,7 +130,7 @@ mocky
                 createdAt: '2019-04-09',
                 asignedAvatar:
                   ['https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'],
-                assignee: ['Matsui Akira'],
+                assignee: ['matsu14'],
                 createrName: 'Noma Yuma',
                 createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
                 title: 'Build people page',
@@ -145,7 +145,7 @@ mocky
                 title: 'Solve select feature',
                 asignedAvatar:
                   ['https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'],
-                assignee: ['Matsui Akira'],
+                assignee: ['matsu14'],
                 createrName: 'Noma Yuma',
                 createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
               },
@@ -157,7 +157,7 @@ mocky
                 startDate: '2019-10-14',
                 createdAt: '2019-10-09',
                 asignedAvatar: ['https://cdn.vuetifyjs.com/images/john.jpg'],
-                assignee: ['Matsui Akira'],
+                assignee: ['matsu14'],
                 createrName: 'Matsui Akira',
                 createdAvatar:
                   'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
@@ -172,7 +172,7 @@ mocky
                 createdAt: '2019-05-11',
                 title: '【Primaly】Feedback of Interview',
                 asignedAvatar: ['https://cdn.vuetifyjs.com/images/john.jpg'],
-                assignee: ['Matsui Akira'],
+                assignee: ['matsu14'],
                 createrName: 'Matsui Akira',
                 createdAvatar:
                   'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
@@ -186,7 +186,7 @@ mocky
                 createdAt: '2019-05-04',
                 asignedAvatar:
                   ['https://avatars0.githubusercontent.com/u/9064066?v=4&s=460','https://cdn.vuetifyjs.com/images/john.jpg'],
-                assignee: ['Noma Yuma', 'Matsui Akira'],
+                assignee: ['nomalio14', 'matsu14'],
                 createrName: 'Noma Yuma',
                 createdAvatar: 'https://cdn.vuetifyjs.com/images/john.jpg',
                 title: 'TB scheduling'

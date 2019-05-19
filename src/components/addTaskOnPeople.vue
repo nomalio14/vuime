@@ -29,9 +29,8 @@
           required
           v-model="chips"
           :items="users"
-          return-object
           item-text="name"
-          item-value="userid"
+          item-value="userId"
           label="Assign to"
           chips
           color="teal lighten-3"
@@ -39,7 +38,7 @@
           multiple
         >
           <template v-slot:selection="data">
-            <v-chip :selected="data.selected" close @input="remove(data.item)">
+            <v-chip :selected="data.selected" close @input="remove(data.item.userId)">
               <strong>{{ data.item.name }}</strong
               >&nbsp;
             </v-chip>
