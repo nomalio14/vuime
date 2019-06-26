@@ -9,11 +9,6 @@ import 'vuetify/dist/vuetify.min.css'
 import Vuex from 'vuex'
 import axios from 'axios'
 //Amplify
-import Amplify, * as AmplifyModules from 'aws-amplify'
-import { AmplifyPlugin } from 'aws-amplify-vue'
-import awsmobile from './aws-exports'
-Amplify.configure(awsmobile)
-Vue.use(AmplifyPlugin, AmplifyModules)
 
 Vue.use(Vuex)
 Vue.use(Vuetify, {
