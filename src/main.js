@@ -8,7 +8,16 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import Vuex from 'vuex'
 import axios from 'axios'
-//Amplify
+import firebase from 'firebase'
+import credetials from '../config/credential'
+
+//Firebase認証
+Vue.config.productionTip = false
+
+const firebaseConfig = credetials.firebase
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 Vue.use(Vuex)
 Vue.use(Vuetify, {
