@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",
-    "@vue/cli-service": "^3.5.0",
+    "@vue/cli-service": "^5.0.8",
     "autoprefixer": "^7.1.2",
     "aws-amplify": "^1.1.26",
     "aws-amplify-vue": "^0.2.9",
